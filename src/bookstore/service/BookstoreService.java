@@ -57,9 +57,13 @@ public class BookstoreService {
 		User u = userService.findUserByNo(userNo);
 		u.isDisabled = true;
 		
-		Rental rental = rentalService.returnAllRentalByUserNo(userNo);
-		Book book = bookService.findBookByNo(rental.bookNo);
-		book.stock += 1;
+		Book book = null;
+		Rental[] rental = rentalService.returnAllRentalByUserNo(userNo);
+		for (int i = 0; i < rental.length; i++) {
+			if (rental[i] == null) break;
+			book = bookService.findBookByNo(rental[i].bookNo);
+			book.stock += 1;			
+		}
 	}
 	
 	// 전체 회원조회 서비스
@@ -80,7 +84,36 @@ public class BookstoreService {
 			System.out.println(u[i].isDisabled);
 		}
 	}
+	
+	// 현재 회원의 대여 현황 조회 서비스
+	//회원번호를 입력받아서 그 고객이 대여중인 모든 책정보
+	//(책번호, 제목, 가격, 대여상태) 출력하기
+	public void returnStatusInfo(int userNo) {
+		User user = userService.findUserByNo(userNo);
+		Rental[] rental = rentalService.returnRentalbyUserNo(userNo);
+		Book book = null;
 		
+		if (rental[0] == null) {
+			System.out.println();
+			System.out.println("현재 고객님의 대여정보는 없습니다.");
+		}
+		
+		System.out.println("===============================================================");
+		System.out.println("[" + user.name + "]님의 대여 정보");
+		System.out.println("도서번호    책제목     가격   대여여부");
+		
+		for (int i = 0; i < rental.length; i++) {
+			if (rental[i] == null) break;
+			book = bookService.findBookByNo(rental[i].bookNo);
+			System.out.print(book.no + "\t");
+			System.out.print(book.title + "\t");
+			System.out.print(book.price + "\t");
+			System.out.println(rental[i].isRent);
+			
+		}
+		System.out.println("===============================================================");		
+	}
+	
 	// 도서등록 서비스
 	// 제목, 저자, 가격을 전달받아서 도서 등록 서비스를 처리한다.
 	//		- Book객체를 생성해서 제목, 저자, 가격 정보를 저장한다.
@@ -103,6 +136,11 @@ public class BookstoreService {
 	//		- 조회된 책정보를 화면에 출력한다.
 	public void searchBooks(String title) {
 		Book[] book = bookService.findBookByTitle(title);
+		
+		if (book[0] == null) {
+			System.out.println();
+			System.out.println("해당 도서의 정보가 없습니다.");
+		}
 		
 		System.out.println("===============================================================");
 		System.out.println("번호    제목             저자    가격   수량");
@@ -142,6 +180,32 @@ public class BookstoreService {
 			System.out.println(book[i].stock);
 		}
 		System.out.println("===============================================================");
+	}
+	
+	// 대여현황조회(추가기능)
+	// 책번호를 입력받아서 그 책을 대여중인 정보(대여번호, 회원번호, 회원명) 출력하기
+	public void rentalStatusInfo(int bookNo) {
+		Rental[] rental = rentalService.returnRentalbyBookNo(bookNo);
+		User user = null;
+		
+		if (rental[0] == null) {
+			System.out.println();
+			System.out.println("해당 책의 대여정보가 없습니다.");
+			return;
+		}
+		
+		System.out.println("===============================================================");
+		System.out.println("대여번호   회원번호   회원명");
+		
+		for (int i = 0; i< rental.length; i++) {
+			if (rental[i] == null) break;
+			System.out.print(rental[i].no + "\t" + "  ");
+			System.out.print(rental[i].userNo + "\t");
+			
+			user = userService.findUserByNo(rental[i].userNo);
+			System.out.println(user.name);
+			
+		}
 	}
 	
 	// 대여 서비스
@@ -187,16 +251,24 @@ public class BookstoreService {
 	//		- 조회된 대여정보를 화면에 출력한다. (null체크)
 	public void retrieveAllRentals() {
 		Rental[] rental = rentalService.getAllRentals();
+		Book book = null;
+		User user = null;
 		
 		if (rental != null) {
 			System.out.println("===============================================================");
-			System.out.println("대여번호     회원번호         책번호        대여여부");
+			System.out.println("대여번호   도서번호 	  책제목     고객번호   고객명   대여여부");
 			
 			for (int i = 0; i < rental.length; i++) {
 				if (rental[i] == null) break;
-				System.out.print(rental[i].no + "\t\t");
-				System.out.print(rental[i].userNo + "\t\t");
-				System.out.print(rental[i].bookNo + "\t\t");
+				System.out.print(rental[i].no + "\t" + "   ");
+				
+				book = bookService.findBookByNo(rental[i].bookNo);
+				System.out.print(rental[i].bookNo + "\t" + " ");
+				System.out.print(book.title + "\t");
+
+				user = userService.findUserByNo(rental[i].userNo);
+				System.out.print(rental[i].userNo + "\t");
+				System.out.print(user.name + "\t" + " ");
 				System.out.println(rental[i].isRent);
 			}
 			System.out.println("===============================================================");
@@ -204,4 +276,26 @@ public class BookstoreService {
 			System.out.println("대여 정보가 없습니다.");
 		}
 	}
+	
+	// 회원번호를 입력받아서 그 고객이 대여중인 모든 책을 일괄반납처리하기
+	public void returnAllRentals(int userNo) {
+		Rental[] rental = rentalService.returnRentalbyUserNo(userNo);
+		Book book = null;
+		
+		if (rental[0] == null) {
+			System.out.println("고객님이 반납하실 책은 없습니다.");
+			return;
+		}
+		
+		for (int i = 0; i < rental.length; i++) {
+			if (rental[i] == null) break;
+			
+			rental[i].isRent = false;
+			
+			book = bookService.findBookByNo(rental[i].bookNo);
+			book.stock += 1;
+		}
+		System.out.println("### 반납처리가 완료되었습니다.");
+	}
+		
 }

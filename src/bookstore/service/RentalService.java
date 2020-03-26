@@ -35,12 +35,13 @@ public class RentalService {
 	
 	// 반납처리 기능
 	// 사용자번호를 전달받아서 그 사용자의 모든 대여도서를 반납처리하는 기능
-	public Rental returnAllRentalByUserNo(int userNo) {
-		Rental result = null;
+	public Rental[] returnAllRentalByUserNo(int userNo) {
+		Rental[] result = new Rental[100];
+		
 		for (int i = 0; i < position; i++) {
 			if (userNo == db[i].userNo) {
 				db[i].isRent = false;
-				result = db[i];
+				result[i] = db[i];
 			}
 		}
 		return result;
@@ -49,6 +50,36 @@ public class RentalService {
 	// 대여현황조회기능
 	// 모든 대여정보를 반환한다.
 	public Rental[] getAllRentals() {
+		
 		return db;
 	}
+	
+	// 회원번호로 대여현황정보를 찾아 반환하는 기능
+	public Rental[] returnRentalbyUserNo(int userNo) {
+		Rental[] result = new Rental[50];
+		
+		for (int i = 0; i < position; i++) {
+			if (userNo == db[i].userNo) {
+				result[i] = db[i];
+			}
+		}
+		return result;
+	}
+	
+	// 책번호로 대여현황정보를 찾아 반환하는 기능
+	public Rental[] returnRentalbyBookNo(int bookNo) {
+		Rental[] result = new Rental[50];
+			
+		for (int i = 0; i < position; i++) {
+			if (bookNo == db[i].bookNo) {
+				result[i] = db[i];
+			}
+		}
+		return result;
+	}
 }
+
+
+
+
+

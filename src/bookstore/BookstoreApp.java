@@ -27,7 +27,7 @@ public class BookstoreApp {
 				System.out.println();
 				System.out.println("[회원관리]");
 				System.out.println("================================================");
-				System.out.println("1.등록  2.조회  3.변경  4.탈퇴  5.전체조회");
+				System.out.println("1.등록  2.조회  3.변경  4.탈퇴  5.전체조회  6.대여현황조회");
 				System.out.println("================================================");
 				
 				System.out.print("회원관련 메뉴를 선택하세요:");
@@ -79,14 +79,21 @@ public class BookstoreApp {
 					System.out.println("[회원 정보 전체조회]");
 					
 					service.retrieveAllUsers();
+				} else if (userMenuNo == 6) {
+					System.out.println("[대여 현황 조회]");
+					
+					System.out.print("회원번호를 입력하세요:");
+					int userNo = scanner.nextInt();
+					
+					service.returnStatusInfo(userNo);
 				}
 				
 			} else if (menuNo == 2) {
 				System.out.println();
 				System.out.println("[도서관리]");
-				System.out.println("================================================");
-				System.out.println("1.검색  2.등록  3.수정  4.전체조회");
-				System.out.println("================================================");
+				System.out.println("==================================================================");
+				System.out.println("1.검색  2.등록  3.수정  4.전체조회  5.대여고객조회");
+				System.out.println("==================================================================");
 				
 				System.out.print("도서관련 메뉴를 선택하세요:");
 				int bookMenuNo = scanner.nextInt();
@@ -130,13 +137,21 @@ public class BookstoreApp {
 				} else if (bookMenuNo == 4) {
 					System.out.println("[도서 정보 전체조회]");
 					service.retrieveAllBooks();
+					
+				} else if (bookMenuNo == 5) {
+					System.out.println("[도서 대여 고객 조회]");
+					
+					System.out.print("조회할 책번호을 입력하세요:");
+					int bookNo = scanner.nextInt();
+					
+					service.rentalStatusInfo(bookNo);
 				}
 				
 			} else if (menuNo == 3) {
 				System.out.println();
 				System.out.println("[대여/반납 관리]");
 				System.out.println("================================================");
-				System.out.println("1.대여  2.반납  3.대여현황조회");
+				System.out.println("1.대여  2.반납  3.대여현황조회  4.일괄반납");
 				System.out.println("================================================");
 				
 				System.out.print("도서관련 메뉴를 선택하세요:");
@@ -164,7 +179,15 @@ public class BookstoreApp {
 				} else if (returnMenuNo == 3) {
 					System.out.println("[대여 정보 전체조회]");
 					service.retrieveAllRentals();
-				}
+					
+				} else if (returnMenuNo == 4) {
+					System.out.println("[일괄 반납 서비스]");
+					
+					System.out.print("회원번호를 입력하세요:");
+					int userNo = scanner.nextInt();
+					
+					service.returnAllRentals(userNo);
+				} 
 				
 			} else if (menuNo == 0) {
 				System.out.println("[프로그램을 종료]");
