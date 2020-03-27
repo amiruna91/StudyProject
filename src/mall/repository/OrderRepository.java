@@ -1,5 +1,7 @@
 package com.sample.mall.repository;
 
+import java.util.Arrays;
+
 import com.sample.mall.vo.Order;
 
 public class OrderRepository {
@@ -40,7 +42,7 @@ public class OrderRepository {
 			}
 		}
 		
-		return result;
+		return Arrays.copyOfRange(result, 0, count);
 	}
 	
 	

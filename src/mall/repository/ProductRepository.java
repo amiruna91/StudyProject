@@ -1,5 +1,7 @@
 package com.sample.mall.repository;
 
+import java.util.Arrays;
+
 import com.sample.mall.vo.Product;
 
 public class ProductRepository {
@@ -20,7 +22,7 @@ public class ProductRepository {
 	
 	public Product[] getAllProducts() {
 		
-		return db;
+		return Arrays.copyOfRange(db, 0, position);
 	}
 	
 	public Product getProductByNo(int productNo) {

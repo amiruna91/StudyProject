@@ -23,17 +23,20 @@ public class MallService {
 	public void displayAllProducts() {
 		Product[] product = productRepo.getAllProducts();
 		
+		if (product.length == 0) {
+			System.out.println("상품정보가 없습니다.");
+			return;
+		}
+		
 		System.out.println();
 		System.out.println("==================================================================================================");
 		System.out.println("상품번호    상품명       가격    할인가격");
 		
-		for (int i = 0; i < product.length; i++) {
-			if (product[i] == null) return;
-			
-			System.out.print(product[i].no + "\t" + "  ");
-			System.out.print(product[i].name + "\t");
-			System.out.print(product[i].price + "\t" + "  ");
-			System.out.println(product[i].discountPrice);
+		for (Product p : product) {
+			System.out.print(p.no + "\t" + "  ");
+			System.out.print(p.name + "\t");
+			System.out.print(p.price + "\t" + "  ");
+			System.out.println(p.discountPrice);
 		}
 		System.out.println("==================================================================================================");
 	}
@@ -105,8 +108,8 @@ public class MallService {
 		item.orderPrice = product.discountPrice;
 		
 		user.addItem(item);
-		product.stock -= 1;
-		product.score += 1;
+		product.stock --;
+		product.score ++;
 		System.out.println("\n장바구니에 담겼습니다.");
 		
 		System.out.println("\n[제품상세정보]");
@@ -215,8 +218,9 @@ public class MallService {
 		
 		System.out.println("=========================================================================");
 		System.out.println("[" + userId + "]님은 주문내역");
-		System.out.println("------------------------------");
+		
 		for (int i = 0; i < orders.length; i++) {
+			System.out.println("------------------------------");
 			System.out.println("구매번호: " + orders[i].no);
 			System.out.println("------------------------------");
 			Item[] items = orders[i].getItems();
