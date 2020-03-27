@@ -137,9 +137,10 @@ public class BookstoreService {
 	public void searchBooks(String title) {
 		Book[] book = bookService.findBookByTitle(title);
 		
-		if (book[0] == null) {
+		if (book.length == 0) {
 			System.out.println();
 			System.out.println("해당 도서의 정보가 없습니다.");
+			return;
 		}
 		
 		System.out.println("===============================================================");
