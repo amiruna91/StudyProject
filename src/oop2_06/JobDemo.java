@@ -1,4 +1,4 @@
-package oop2_6;
+package oop2_06;
 
 public class JobDemo {
 
