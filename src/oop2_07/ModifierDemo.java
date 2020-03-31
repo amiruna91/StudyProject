@@ -1,6 +1,6 @@
-package oop2_7;
+package oop2_07;
 
-import oop2_7.sub.Modifier;
+import oop2_07.sub.Modifier;
 
 public class ModifierDemo {
 

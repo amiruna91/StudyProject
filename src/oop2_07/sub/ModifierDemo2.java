@@ -1,4 +1,4 @@
-package oop2_7.sub;
+package oop2_07.sub;
 
 public class ModifierDemo2 {
 
