@@ -1,4 +1,4 @@
-package oop1_1;
+package oop1_01;
 
 public class PersonDemo2 {
 
