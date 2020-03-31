@@ -1,12 +1,12 @@
-package com.sample.mall.service;
+package mall.service;
 
-import com.sample.mall.repository.OrderRepository;
-import com.sample.mall.repository.ProductRepository;
-import com.sample.mall.repository.UserRepository;
-import com.sample.mall.vo.Item;
-import com.sample.mall.vo.Order;
-import com.sample.mall.vo.Product;
-import com.sample.mall.vo.User;
+import mall.repository.OrderRepository;
+import mall.repository.ProductRepository;
+import mall.repository.UserRepository;
+import mall.vo.Item;
+import mall.vo.Order;
+import mall.vo.Product;
+import mall.vo.User;
 
 public class MallService {
 

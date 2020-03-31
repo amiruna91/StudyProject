@@ -1,8 +1,8 @@
-package com.sample.mall;
+package mall;
 
 import java.util.Scanner;
 
-import com.sample.mall.service.MallService;
+import mall.service.MallService;
 
 public class MallApp {
 

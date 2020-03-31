@@ -1,4 +1,4 @@
-package com.sample.mall.vo;
+package mall.vo;
 
 public class Item {
 

@@ -1,8 +1,8 @@
-package com.sample.mall.repository;
+package mall.repository;
 
 import java.util.Arrays;
 
-import com.sample.mall.vo.Order;
+import mall.vo.Order;
 
 public class OrderRepository {
 
