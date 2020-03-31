@@ -1,6 +1,6 @@
-package com.sample.bookstore.service;
+package bookstore.service;
 
-import com.sample.bookstore.vo.User;
+import bookstore.vo.User;
 
 public class UserService {
 

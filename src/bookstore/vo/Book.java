@@ -1,4 +1,4 @@
-package com.sample.bookstore.vo;
+package bookstore.vo;
 
 public class Book {
 	

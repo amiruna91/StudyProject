@@ -1,8 +1,8 @@
-package com.sample.bookstore.service;
+package bookstore.service;
 
 import java.util.ArrayList;
 
-import com.sample.bookstore.vo.Book;
+import bookstore.vo.Book;
 
 public class BookService {
 

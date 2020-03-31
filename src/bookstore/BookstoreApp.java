@@ -1,10 +1,10 @@
-package com.sample.bookstore;
+package bookstore;
 
 import java.util.Scanner;
 
-import com.sample.bookstore.service.BookstoreService;
-import com.sample.bookstore.vo.Book;
-import com.sample.bookstore.vo.User;
+import bookstore.service.BookstoreService;
+import bookstore.vo.Book;
+import bookstore.vo.User;
 
 public class BookstoreApp {
 

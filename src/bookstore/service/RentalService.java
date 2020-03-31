@@ -1,6 +1,6 @@
-package com.sample.bookstore.service;
+package bookstore.service;
 
-import com.sample.bookstore.vo.Rental;
+import bookstore.vo.Rental;
 
 public class RentalService {
 

@@ -1,8 +1,8 @@
-package com.sample.bookstore.service;
+package bookstore.service;
 
-import com.sample.bookstore.vo.Book;
-import com.sample.bookstore.vo.Rental;
-import com.sample.bookstore.vo.User;
+import bookstore.vo.Book;
+import bookstore.vo.Rental;
+import bookstore.vo.User;
 
 public class BookstoreService {
 
