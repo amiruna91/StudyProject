@@ -1,4 +1,4 @@
-package oop2_5;
+package oop2_05;
 
 public class Ghost extends Unit{
 

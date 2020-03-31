@@ -1,4 +1,4 @@
-package oop2_5;
+package oop2_05;
 
 // 추상클래스 정의
 public abstract class Unit {
