@@ -1,4 +1,4 @@
-package oop2_8;
+package oop2_08;
 
 public class PersonDemo {
 
