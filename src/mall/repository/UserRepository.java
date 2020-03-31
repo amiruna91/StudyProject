@@ -1,6 +1,6 @@
-package com.sample.mall.repository;
+package mall.repository;
 
-import com.sample.mall.vo.User;
+import mall.vo.User;
 
 public class UserRepository {
 

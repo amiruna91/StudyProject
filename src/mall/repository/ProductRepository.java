@@ -1,8 +1,8 @@
-package com.sample.mall.repository;
+package mall.repository;
 
 import java.util.Arrays;
 
-import com.sample.mall.vo.Product;
+import mall.vo.Product;
 
 public class ProductRepository {
 
