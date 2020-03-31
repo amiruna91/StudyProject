@@ -1,4 +1,4 @@
-package oop2_2;
+package oop2_02;
 
 public class LaserPrinter extends Printer{
 
