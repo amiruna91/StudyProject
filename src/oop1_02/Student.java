@@ -1,4 +1,4 @@
-package oop1_2;
+package oop1_02;
 
 /**
  *  
