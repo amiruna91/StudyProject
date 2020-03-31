@@ -1,4 +1,4 @@
-package oop2_4;
+package oop2_04;
 
 public class DataOutput {
 
