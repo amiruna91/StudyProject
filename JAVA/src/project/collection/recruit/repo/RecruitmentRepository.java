@@ -1,6 +1,7 @@
 package collection.recruit.repo;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import collection.recruit.vo.Recruitment;
 
@@ -28,13 +29,14 @@ public class RecruitmentRepository {
 	
 	// 나의 구직신청 삭제하기
 	public void deleteRecruitmentByNo(int recruitmentNo) {
-		int count = 0;
-		for (Recruitment recruitment : db) {
+		Iterator<Recruitment> itr = db.iterator();
+		
+		while (itr.hasNext()) {
+			Recruitment recruitment = itr.next();
 			if (recruitment.getNo() == recruitmentNo) {
-				db.remove(count);
+				itr.remove();
 				break;
 			}
-			count++;
 		}
 	}
 	
