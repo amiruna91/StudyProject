@@ -55,10 +55,11 @@ where manager_id is null
 and A.location_id = B.location_id
 order by department_id;
 
--- 9.  90번 부서에 소속된 직원의 직원아이디, 이름, 직종, 급여를 조회하기
-select employee_id, first_name, job_id, salary
-from employees 
-where department_id = 90
+-- 9.  'Executive' 부서에 소속된 직원의 직원아이디, 이름, 직종, 급여를 조회하기
+select A.employee_id, A.first_name, A.job_id, A.salary
+from employees A, departments B
+where b.department_name = 'Executive'
+and a.department_id = b.department_id
 order by employee_id;
 
 -- 10. 100번 직원이 부서관리자로 지정된 부서에 소속된 직원의 직원아이디, 이름, 직종, 급여를 조회하기
@@ -118,7 +119,7 @@ order by A.employee_id;
 
 -- 16. 급여를 5000달러 이하로 받는 직원들의 아이디, 이름, 직종, 소속부서 아이디, 소속부서명, 소속부서 관리자 직원아이디, 
 --     소속부서 관리자 직원이름을 조회하기
-select A.employee_id, A.first_name, A.job_id
+select A.employee_id, A.first_name, A.job_id, A.salary
     , B.department_id, B.department_name, B.manager_id
     , C.first_name
 from employees A, departments B, employees C
@@ -146,10 +147,10 @@ and A.department_id = C.department_id;
 
 -- 19. 직원중에서 자신이 종사하고 있는 직종의 최고급여 50%이상을 급여로 받고 있는 
 --     직원의 아이디, 이름, 급여, 직종아이디, 직종 최고급여를 조회하기
-select DISTINCT c.employee_id, c.first_name, c.salary, b.job_id, b.max_salary 
-from employees A, jobs B, employees C
+select A.employee_id, A.first_name, A.salary, b.job_id, b.max_salary 
+from employees A, jobs B
 where A.job_id = B.job_id
-and C.salary >= b.max_salary*1.5
+and A.salary >= b.max_salary/2
 order by B.job_id;
 
 -- 20. 미국(US)에 위치하고 있는 부서의 아이디, 이름, 위치번호, 도시명, 주소를 조회하기 
