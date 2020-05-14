@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        table {
+            width: 100%;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+
+        th {
+            text-align: left;
+            background-color: lightgray;
+        }
+
+        th,
+        td {
+            padding: 12px;
+        }
+        
+        div {
+            margin: 7px 0;
+        }
+    </style>
+</head>
+<body>
+    <div style="width: 600px; margin: 10px auto;">
+        <div>
+            <!-- header -->
+            <h1>과정검색</h1>
+        </div>
+        <div>
+            <!-- body -->
+            <div>
+                <!-- 검색부 -->
+                <form>
+                    <!-- 학과 선택 -->
+                    <select name="dept" style="width: 20%; height: 30px;">
+                        <option value="">학과</option>
+                        <option value="electornic"> 전자 공학과 </option>
+                        <option value="infocom"> 정보통신 공학과 </option>
+                        <option value="machine"> 기계 공학과 </option>   
+                        <option value="computer"> 컴퓨터 공학과 </option>
+                    </select>
+                    <!-- 텍스트 부분 -->
+                    <input type="text" name="dept_text" tyle="width: 20%; height: 30px"/>
+                    <!-- 조회 버튼 -->
+                    <button type="submit" style="padding: 3px 15px;">조회</button>    
+                </form>
+            </div>
+            <div>
+                <!-- 테이블 -->
+                <table>
+                    <thead>
+                        <tr>
+                            <th>과정번호</th>
+                            <th>과정명</th>
+                            <th>담당교수</th>
+                            <th>정원</th>
+                            <th>신청자수</th>
+                            <th>마감여부</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>10000</td>
+                            <td>자바기초</td>
+                            <td>이교수</td>
+                            <td>30</td>
+                            <td>15</td>
+                            <td>N</td>
+                        </tr>
+                        <tr>
+                            <td>10021</td>
+                            <td>데이터베이스</td>
+                            <td>이교수</td>
+                            <td>40</td>
+                            <td>30</td>
+                            <td>N</td>
+                        </tr>
+                        <tr>
+                            <td>10031</td>
+                            <td>HTML</td>
+                            <td>김교수</td>
+                            <td>30</td>
+                            <td>30</td>
+                            <td>Y</td>
+                        </tr>
+                        <tr>
+                            <td>10033</td>
+                            <td>자바스크립트</td>
+                            <td>김교수</td>
+                            <td>40</td>
+                            <td>15</td>
+                            <td>N</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div>
+                <!-- 텍스트 표시 -->
+                <p>수강신청 가능과정: <mark>5개</mark>     마감된 과정: <mark>1개</mark></p>
+            </div>
+        </div>
+        <div>
+            <!-- footer -->
+            <p>
+                중앙HTA학교 주소:서울특별시 종로구 울곡로 10길 105 디아망빌딩 4층
+            </p>
+        </div>
+    </div>
+</body>
+</html>
