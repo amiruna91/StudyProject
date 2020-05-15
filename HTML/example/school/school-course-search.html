@@ -32,31 +32,29 @@
 </head>
 <body>
     <div style="width: 600px; margin: 10px auto;">
+        <!-- header -->
         <div>
-            <!-- header -->
             <h1>과정검색</h1>
         </div>
+        <!-- body -->
         <div>
-            <!-- body -->
+            <!-- 검색부 -->
             <div>
-                <!-- 검색부 -->
                 <form>
                     <!-- 학과 선택 -->
-                    <select name="dept" style="width: 20%; height: 30px;">
-                        <option value="">학과</option>
-                        <option value="electornic"> 전자 공학과 </option>
-                        <option value="infocom"> 정보통신 공학과 </option>
-                        <option value="machine"> 기계 공학과 </option>   
-                        <option value="computer"> 컴퓨터 공학과 </option>
+                    <select name="searchOpt" style="width: 20%; height: 30px;">
+                        <option value="D"> 학과 </option>
+                        <option value="P"> 담당교수 </option>
+                        <option value="C"> 과정명 </option>   
                     </select>
                     <!-- 텍스트 부분 -->
-                    <input type="text" name="dept_text" tyle="width: 20%; height: 30px"/>
+                    <input type="text" name="searchKeyword" tyle="width: 20%; height: 30px"/>
                     <!-- 조회 버튼 -->
                     <button type="submit" style="padding: 3px 15px;">조회</button>    
                 </form>
             </div>
+            <!-- 테이블 -->
             <div>
-                <!-- 테이블 -->
                 <table>
                     <thead>
                         <tr>
@@ -77,7 +75,7 @@
                             <td>15</td>
                             <td>N</td>
                         </tr>
-                        <tr>
+                        <tr>s
                             <td>10021</td>
                             <td>데이터베이스</td>
                             <td>이교수</td>
@@ -104,16 +102,20 @@
                     </tbody>
                 </table>
             </div>
+            <!-- 텍스트 표시 -->
             <div>
-                <!-- 텍스트 표시 -->
-                <p>수강신청 가능과정: <mark>5개</mark>     마감된 과정: <mark>1개</mark></p>
+                <p>
+                    현재 신청가능한 과정 수: <mark>5개</mark>     
+                    현재 신청마감된 과정 수: <mark>1개</mark>
+                </p>
             </div>
         </div>
+        
+        <!-- footer -->
         <div>
-            <!-- footer -->
-            <p>
-                중앙HTA학교 주소:서울특별시 종로구 울곡로 10길 105 디아망빌딩 4층
-            </p>
+            <p>중앙HTA학교</p>
+            <p>주소 :서울특별시 종로구 울곡로</p>
+            <p>전화 : 070-1111-1111 메일 : adimn@naver.com</p>
         </div>
     </div>
 </body>
