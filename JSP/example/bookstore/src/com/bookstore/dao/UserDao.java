@@ -37,6 +37,33 @@ public class UserDao {
 		return users;
 	}
 	
+	public User getUserById(String userId) throws Exception {
+		User user = null;
+		
+		Connection connection = ConnectionUtil.getConnection();
+		PreparedStatement pstmt = connection.prepareStatement(QueryUtil.getSQl("user.getUserById"));
+		pstmt.setString(1, userId);
+		ResultSet rs = pstmt.executeQuery();
+		
+		if (rs.next()) {
+			user = new User();
+			
+			user.setId(rs.getString("user_id"));
+			user.setName(rs.getString("user_name"));
+			user.setEmail(rs.getString("user_email"));
+			user.setPoint(rs.getInt("user_point"));
+			user.setRegeisteredDate(rs.getDate("user_registered_date"));
+			
+		}
+		
+		rs.close();
+		pstmt.close();
+		connection.close();
+		
+		return user;
+	}
+	
+	
 	public List<User> getAllUser() throws Exception {
 		List<User> users = new ArrayList<User>();
 		
