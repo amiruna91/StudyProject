@@ -73,11 +73,22 @@
 						<%
 							if (order.getWriteReveiw() == 1) {
 						%>
-							<td>작성완료</td>
+							<td>[작성완료]</td>
 						<%
 							} else {
 						%>						
-							<td><a href="../review/form.jsp?userid=<%=userId %>&bookno=<%=order.getBookNo()%>">리뷰작성</a></td>
+							<td><a href="../review/form.jsp?userid=<%=userId %>&bookno=<%=order.getBookNo()%>"><strong>[리뷰작성]</strong></a></td>
+						<%	
+							}
+						%>
+						<%
+							if (order.getIsLike() == 1) {
+						%>
+							<td>[추천완료]</td>
+						<%
+							} else {
+						%>						
+							<td><a href="../book/like.jsp?userid=<%=userId %>&bookno=<%=order.getBookNo()%>"><strong>[추천하기]</strong></a></td>
 						<%	
 							}
 						%>
@@ -88,9 +99,9 @@
 					%>
 					</tbody>
 				</table>
-				<div class="text-right">
-					<a href="../user/list.jsp">사용자 목록으로</a>
-				</div>
+			</div>
+			<div class="text-right">
+				<a href="../user/list.jsp">사용자 목록으로</a>
 			</div>
 		</div>
 		<%@ include file="../common/footer.jsp" %>

@@ -6,14 +6,32 @@ public class OrderDto {
 
 	private int orderNo;
 	private String userId;
+	private String userName;
 	private int bookNo;
 	private String bookTitle;
 	private int amount;
 	private int orderPrice;
 	private Date registeredDate;
 	private int writeReveiw;
+	private int isLike;
 	
 	public OrderDto() {}
+	
+	public int getIsLike() {
+		return isLike;
+	}
+	
+	public void setIsLike(int isLike) {
+		this.isLike = isLike;
+	}
+	
+	public String getUserName() {
+		return userName;
+	}
+	
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
 
 	public int getWriteReveiw() {
 		return writeReveiw;

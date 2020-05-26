@@ -44,6 +44,60 @@ public class OrderDao {
 			order.setAmount(rs.getInt("order_amount"));
 			order.setRegisteredDate(rs.getDate("order_registered_date"));
 			order.setWriteReveiw(rs.getInt("write_review"));
+			order.setIsLike(rs.getInt("is_like"));
+			
+			orders.add(order);
+		}
+		
+		rs.close();
+		pstmt.close();
+		connection.close();
+		
+		return orders;
+	}
+	
+	public List<OrderDto> getAllOrders() throws Exception {
+		List<OrderDto> orders = new ArrayList<OrderDto>();
+		
+		Connection connection = ConnectionUtil.getConnection();
+		PreparedStatement pstmt = connection.prepareStatement(QueryUtil.getSQl("order.getAllOrders"));
+		ResultSet rs = pstmt.executeQuery();
+		
+		while (rs.next()) {
+			OrderDto order = new OrderDto();
+			order.setOrderNo(rs.getInt("order_no"));
+			order.setUserName(rs.getString("user_name"));
+			order.setBookTitle(rs.getString("book_title"));
+			order.setOrderPrice(rs.getInt("order_price"));
+			order.setAmount(rs.getInt("order_amount"));
+			order.setRegisteredDate(rs.getDate("order_registered_date"));
+			
+			orders.add(order);
+		}
+		
+		rs.close();
+		pstmt.close();
+		connection.close();
+		
+		return orders;
+	}
+	
+	public List<OrderDto> getOrdersByGenre(String genre) throws Exception {
+		List<OrderDto> orders = new ArrayList<OrderDto>();
+		
+		Connection connection = ConnectionUtil.getConnection();
+		PreparedStatement pstmt = connection.prepareStatement(QueryUtil.getSQl("order.getOrdersByGenre"));
+		pstmt.setString(1, genre);
+		ResultSet rs = pstmt.executeQuery();
+		
+		while (rs.next()) {
+			OrderDto order = new OrderDto();
+			order.setOrderNo(rs.getInt("order_no"));
+			order.setUserName(rs.getString("user_name"));
+			order.setBookTitle(rs.getString("book_title"));
+			order.setOrderPrice(rs.getInt("order_price"));
+			order.setAmount(rs.getInt("order_amount"));
+			order.setRegisteredDate(rs.getDate("order_registered_date"));
 			
 			orders.add(order);
 		}

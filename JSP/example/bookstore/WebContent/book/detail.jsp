@@ -1,3 +1,4 @@
+<%@page import="com.bookstore.util.StringUtil"%>
 <%@page import="com.bookstore.util.NumberUtil"%>
 <%@page import="java.util.List"%>
 <%@page import="com.bookstore.dao.ReviewDao"%>
@@ -35,6 +36,12 @@
 			<div>
 				<h3>책의 상세정보</h3>
 				<table class="table bordered">
+					<colgroup>
+						<col width="10%">
+						<col width="40%">
+						<col width="10%">
+						<col width="40%">
+					</colgroup>	
 					<tr>
 						<th>제목</th>
 						<td colspan="3"><%=book.getTitle() %></td>
@@ -77,6 +84,14 @@
 				%>
 				<h3>이 책의 리뷰</h3>
 				<table class="table">
+					<colgroup>
+						<col width="10%">
+						<col width="23%">
+						<col width="10%">
+						<col width="23%">
+						<col width="10%">
+						<col width="23%">
+					</colgroup>
 					<tbody>
 					<%
 						if (reviews.isEmpty()) {
@@ -97,7 +112,7 @@
 							<td><%=review.getRegisteredDate() %></td>
 						</tr>
 						<tr>
-							<td colspan="6"><%=review.getContent() %></td>
+							<td colspan="6"><%=StringUtil.strWithBr(review.getContent()) %></td>
 						</tr>
 					<%
 							}
