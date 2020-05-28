@@ -35,38 +35,29 @@
 		<%@ include file="../common/navibar.jsp" %>
 	</div>
 	<div class="header">
-		<h1>전체 주문내역</h1>
+		<h1>주문내역</h1>
 	</div>
 	<div class="body">
-	<%
-		OrderDao orderDao = new OrderDao();
-		String genre = StringUtil.nullToBlank(request.getParameter("genre"));
-		List<OrderDto> orders = new ArrayList<OrderDto>();
-
-		if (genre.isEmpty()) {
-			orders = orderDao.getAllOrders();
-		} else {
-			orders = orderDao.getOrdersByGenre(genre);
-		}
-	%>
+		<%
+			// 로그인 여부 체크
+			
+			// 로그인되지 않은 사용자는 로그인폼을 재요청하게 한다.
+			if (!"Yes".equals(isLogined)) {
+				response.sendRedirect("/bookstore/user/loginform.jsp?error=deny");
+				return;
+			}
+			
+			// 로그인된 회원인 경우.
+			// 회원의 정보를 추가적인 입력없이 세션에서 회원정보를 가져온다.
+			String userName = (String) session.getAttribute("이름");
+			String userId = (String) session.getAttribute("아이디");
+			
+			// 세션에서 조회한 회원정보로 그 회원의 주문내역을 조회한다.
+			OrderDao orderDao = new OrderDao();
+			List<OrderDto> orders = orderDao.getOrderByUserId(userId);
+		%>
 		<div>
-			<div>
-				<form method="get" action="all.jsp">
-					<label>구분</label>
-					<select name="genre" >
-						<option value="" 				<%="".equals(genre) ? "selected" : "" %>>전체</option>
-						<option value="소설"			<%="소설".equals(genre) ? "selected" : "" %>> 소설</option>
-						<option value="인문" 			<%="인문".equals(genre) ? "selected" : "" %>> 인문</option>
-						<option value="경제" 			<%="경제".equals(genre) ? "selected" : "" %>> 경제</option>
-						<option value="자연과학/공학" 	<%="자연과학/공학".equals(genre) ? "selected" : "" %>> 자연과학/공학</option>
-						<option value="IT" 				<%="IT".equals(genre) ? "selected" : "" %>> IT</option>
-						<option value="외국어" 			<%="외국어".equals(genre) ? "selected" : "" %>> 외국어</option>
-						<option value="교재/수험서" 	<%="교재/수험서".equals(genre) ? "selected" : "" %>> 교재/수험서</option>
-					</select>
-					<button type="submit">검색</button>
-				</form>
-			</div>
-			<h3>전체 주문내역을 확인하세요.</h3>
+			<p><strong><%=userName %>님</strong> 주문내역을 확인하세요.</p>
 			<table class="table">
 				<colgroup>
 					<col width="10%">
@@ -90,18 +81,26 @@
 				</thead>
 				<tbody>
 				<%
-					for (OrderDto order : orders) {
+					if (orders.isEmpty()) {
 				%>
-					<tr>
-						<td><%=order.getOrderNo() %></td>
-						<td><%=order.getUserName() %></td>
-						<td><%=order.getBookTitle() %></td>
-						<td><%=NumberUtil.numberWithComma(order.getOrderPrice()) %></td>
-						<td><%=order.getAmount() %></td>
-						<td><%=NumberUtil.numberWithComma(order.getOrderPrice()*order.getAmount()) %></td>
-						<td><%=order.getRegisteredDate() %></td>
-					</tr>
+						<tr>
+							<td>주문내역이 없습니다.</td>
+						</tr>
 				<%
+					} else {
+						for (OrderDto order : orders) {
+				%>
+						<tr>
+							<td><%=order.getOrderNo() %></td>
+							<td><%=userName %></td>
+							<td><%=order.getBookTitle() %></td>
+							<td><%=NumberUtil.numberWithComma(order.getOrderPrice()) %></td>
+							<td><%=order.getAmount() %></td>
+							<td><%=NumberUtil.numberWithComma(order.getOrderPrice()*order.getAmount()) %></td>
+							<td><%=order.getRegisteredDate() %></td>
+						</tr>
+				<%
+						}
 					}
 				%>
 				</tbody>

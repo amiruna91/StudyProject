@@ -50,6 +50,7 @@ public class UserDao {
 			
 			user.setId(rs.getString("user_id"));
 			user.setName(rs.getString("user_name"));
+			user.setPassword(rs.getString("user_password"));
 			user.setEmail(rs.getString("user_email"));
 			user.setPoint(rs.getInt("user_point"));
 			user.setRegeisteredDate(rs.getDate("user_registered_date"));
