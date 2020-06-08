@@ -68,6 +68,7 @@
 			console.log("사용자 이름: ", userName);
 			if (!userName) {
 				alert("사용자 이름은 필수 입력값입니다.");
+				document.getElementById("user-name").focus();
 				return;
 			}
 			
@@ -75,6 +76,7 @@
 			console.log("사용자 아이디: ", userId);
 			if (!userId){
 				alert("사용자 아이디는 필수입력값입니다.");
+				document.getElementById("user-id").focus();
 				return;
 			}
 	
@@ -86,6 +88,7 @@
 			
 			if (!userPassword1) {
 				alert("비밀번호는 필수입력값입니다.");
+				document.getElementById("user-pwd1").focus();
 				return;
 			}
 			
@@ -93,6 +96,7 @@
 				alert("비밀번호가 서로 일치하지 않습니다.");
 				document.getElementById("user-pwd1").value = "";
 				document.getElementById("user-pwd2").value = "";
+				document.getElementById("user-pwd1").focus();
 				return;
 			}
 			
@@ -102,6 +106,7 @@
 			
 			if (!userAddr) {
 				alert("주소지를 선택하세요");
+				document.getElementById("user-addr").focus();
 				return;
 			}
 			
@@ -131,6 +136,14 @@
 				return;
 			}
 			// textarea의 값 읽어오기
+			var userProfile = document.getElementById("user-profile").value;
+			console.log("자기소개: ", userProfile);
+			if (!userProfile) {
+				alert("자기소개를 작성하세요");
+				document.getElementById("user-profile").focus();
+				return;
+			}
+			alert("모든 입력값이 유효합니다.");
 		}
 	</script>
 </body>
