@@ -23,15 +23,23 @@
 		request.setAttribute("num1", 30);
 		request.setAttribute("num2", 15);
 		
+		request.setAttribute("name", "홍길동");
 	%>
 	<div class="row">
 		<div class="col-12">
+			<h3>숫자값 비교</h3>
 			<p>비교하기 : ${num1 > num2 } ${num1 gt num2 }</p>
 			<p>비교하기 : ${num1 >= num2 } ${num1 ge num2 }</p>
 			<p>비교하기 : ${num1 < num2 } ${num1 lt num2 }</p>
 			<p>비교하기 : ${num1 <= num2 } ${num1 le num2 } </p>
 			<p>비교하기 : ${num1 == num2 } ${num1 eq num2 } </p>
 			<p>비교하기 : ${num1 != num2 } ${num1 ne num2 } </p>
+		</div>
+		
+		<div class="col-12">
+			<h3>문자열 비교</h3>
+			<p>비교하기 : ${name == '홍길동' } ${name eq '홍길동' }</p>
+			<p>비교하기 : ${name != '홍길동' } ${name ne '홍길동' }</p>
 		</div>
 	</div>
 </div>
