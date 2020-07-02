@@ -15,16 +15,14 @@
 </head>
 <body>
 <div class="container">
-<%@ include file="common/nav.jsp" %>
+<%@ include file="../common/nav.jsp" %>
 	<div class="row">
 		<div class="col-12">
-			<h1>Home</h1>
-			<p>${message }</p>
+			<h1>전체 도서 목록</h1>
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-12">
-			<h3>최근 등록된 책<small class="float-right"><a href="book/list.hta">더보기</a></small></h3>
 			<table class="table">
 				<thead>
 					<tr>
@@ -36,22 +34,20 @@
 					</tr>
 				</thead>
 				<tbody>
-				<!-- 
-					forEach 태그를 사용해서 최근 등록된 책을 표현하시오.
-					가격은 자릿수가 표현되도록 표현하시오.
-					등록일은 2020.9.1과 같은 형식으로 표현하시오.
-				 -->
-					 <c:forEach items="${recentBooks }" var="recentBook" varStatus="recentBookStatus">
-					 	<tr>
-					 		<td>${recentBookStatus.count }</td>
-					 		<td><c:out value="${recentBook.title }"/></td>
-					 		<td>${recentBook.writer }</td>
-					 		<td><fmt:formatNumber value="${recentBook.price }"/></td>
-					 		<td><fmt:formatDate value="${recentBook.registeredDate }" pattern="yyyy.M.d" /></td>
-					 	</tr>
-					 </c:forEach>
+					<c:forEach items="${bookList }" var="book" varStatus="bookStatus">
+						<tr>
+							<td>${bookStatus.count }</td>
+							<td><a href="detail.hta?bookno=${book.no }"><c:out value="${book.title }" /></a></td>
+							<td>${book.writer }</td>
+							<td><fmt:formatNumber value="${book.price }" />원</td>
+							<td><fmt:formatDate value="${book.registeredDate }" pattern="yyyy.M.d"/></td>
+						</tr>
+					</c:forEach>
 				</tbody>
 			</table>
+			<div class="mt-3 text-right">
+				<a href="form.hta" class="btn btn-primary">새 책</a>
+			</div>
 		</div>
 	</div>
 </div>

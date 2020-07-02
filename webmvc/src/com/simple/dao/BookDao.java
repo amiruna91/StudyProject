@@ -12,7 +12,7 @@ import com.simple.vo.Book;
 public class BookDao {
 
 	public List<Book> getAllBooks() throws SQLException {
-		return JdbcHelper.selectList(QueryUtil.getSQL("book.getAllBooks"), new RowMapper<Book>() {
+		return JdbcHelper.selectList(QueryUtil.getSQl("book.getAllBooks"), new RowMapper<Book>() {
 			@Override
 			public Book mapRow(ResultSet rs) throws SQLException {
 				Book book = new Book();
@@ -33,7 +33,7 @@ public class BookDao {
 	}
 	
 	public Book getBookByNo(int bookNo) throws SQLException {
-		return JdbcHelper.selectOne(QueryUtil.getSQL("book.getBookByNo"), new RowMapper<Book>() {
+		return JdbcHelper.selectOne(QueryUtil.getSQl("book.getBookByNo"), new RowMapper<Book>() {
 			@Override
 			public Book mapRow(ResultSet rs) throws SQLException {
 				Book book = new Book();
@@ -54,7 +54,7 @@ public class BookDao {
 	}
 	
 	public List<Book> getRecentBooks() throws SQLException {
-		return JdbcHelper.selectList(QueryUtil.getSQL("book.getRecentBooks"), new RowMapper<Book>() {
+		return JdbcHelper.selectList(QueryUtil.getSQl("book.getRecentBooks"), new RowMapper<Book>() {
 			@Override
 			public Book mapRow(ResultSet rs) throws SQLException {
 				Book book = new Book();
@@ -75,7 +75,7 @@ public class BookDao {
 	}
 	
 	public void insertBook(Book book) throws SQLException {
-		JdbcHelper.insert(QueryUtil.getSQL("book.insertBook"), book.getTitle(), book.getWriter(), book.getGenre(),
+		JdbcHelper.insert(QueryUtil.getSQl("book.insertBook"), book.getTitle(), book.getWriter(), book.getGenre(),
 				book.getPublisher(), book.getPrice(), book.getDiscountPrice());
 	}
 }

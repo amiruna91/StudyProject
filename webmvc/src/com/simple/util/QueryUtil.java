@@ -1,59 +1,27 @@
 package com.simple.util;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FilenameFilter;
-import java.io.IOException;
-import java.net.URL;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Properties;
 
 
 public class QueryUtil {
 
-	private static Map<String, Properties> queryMap = new HashMap<String, Properties>();
+	// query.properties에 정의된 내용을 key,value의 쌍으로 보관하는 객체
+	private static Properties prop = new Properties();
 	
 	static {
 		try {
-			String packageName = QueryUtil.class.getPackage().getName();
-			URL root = Thread.currentThread().getContextClassLoader().getResource(packageName.replace(".", "/"));
-			
-			addProperties(getFiles(root));
+			prop.load(Class.forName("com.simple.util.QueryUtil").getResourceAsStream("query.properties"));
 		} catch (Exception e) {
-			throw new RuntimeException("SQL Properties File Not Found!");
+			throw new RuntimeException(e);
 		}
 	}
 	
-	private static File[] getFiles(URL root) {
-		return new File(root.getFile()).listFiles(new FilenameFilter() {
-		    public boolean accept(File dir, String name) {
-		        return name.endsWith(".properties");
-		    }
-		});
-	}
-	
-	private static void addProperties(File[] files) throws IOException {
-		for (File file : files) {
-			String key = file.getName().substring(0, file.getName().indexOf("."));
-			Properties prop = new Properties();
-			prop.load(new FileInputStream(file));
-			
-			queryMap.put(key, prop);
-		}		
-	}
-	
-	public static String getSQL(String name) {
-		String key = name.substring(0, name.indexOf("."));
-		Properties prop = queryMap.get(key);
-		if (prop == null) {
-			throw new RuntimeException("Invalid Query name!");
-		}
-		
-		String sql = prop.getProperty(name);
-		if (sql == null) {
-			throw new RuntimeException("Invalid Query name!");
-		}
-		return sql;
+	/**
+	 * 지정된 이름의 쿼리문을 반환한다.
+	 * @param name query.properties에 정의된 SQL의 이름
+	 * @return SQL 구문, 유효한 이름이 아닌 경우 null 이 반환됨
+	 */
+	public static String getSQl(String name) {
+		return prop.getProperty(name);
 	}
 }
