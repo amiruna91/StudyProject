@@ -30,15 +30,4 @@ public class HomeController {
 		
 		return mav;
 	}
-	
-	@RequestMapping("/detail.hta")
-	public ModelAndView detail(HttpServletRequest req, HttpServletResponse res) throws Exception {
-		int no = NumberUtil.stringToInt(req.getParameter("todoNo"));
-		TodoDto todo = todoService.getTodoByNo(no);
-		
-		ModelAndView mav = new ModelAndView();
-		mav.addAttribute("detailTodo", todo);
-		mav.setView(jsonView);
-		return mav;
-	}
 }

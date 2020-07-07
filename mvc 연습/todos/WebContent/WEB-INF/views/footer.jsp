@@ -121,7 +121,6 @@
 			var userEmail = document.querySelector("input[name=email]").value;
 			var data = "name=" + userName + "&id=" + userId
 					+ "&pwd=" + userPwd + "&email=" + userEmail;
-			
 			var xhr = new XMLHttpRequest();
 			xhr.onreadystatechange = function() {
 				if (xhr.readyState == 4 && xhr.status == 200) {
@@ -136,7 +135,7 @@
 					}
 				}
 			}
-			xhr.open("post", "register.hta");
+			xhr.open("post", "/register.hta");
 			
 			xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 			xhr.send(data);
@@ -166,7 +165,7 @@
 				}
 			}
 			
-			xhr.open("post", "login.hta");
+			xhr.open("post", "/login.hta");
 			xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 			xhr.send(data);
 		}

@@ -28,7 +28,7 @@
 								<div class="card">
 									<div class="card-header d-flex justify-content-between">
 										<div><c:out value="${todo.title }" /></div> 
-										<div><span class="badge ${todo.statusClass }"><c:out value="${todo.status }" /></span></div>
+										<div><span id="card-todo-status-${todo.no }" class="badge ${todo.statusClass }">${todo.status }</span></div>
 									</div>
 									<div class="card-body">
 										<div class="row mb-3">
@@ -76,35 +76,39 @@
      							</colgroup>
      							<tbody>
      								<tr>
+     									<th>번호</th>
+     									<td id="modal-todo-no">100</td>
      									<th>제목</th>
-     									<td colspan="3">프로젝트 일정 회의</td>
+     									<td id="modal-todo-title">프로젝트 일정 회의</td>
      								</tr>
      								<tr>
      									<th>작성자</th>
-     									<td>홍길동</td>
-     									<th>등록일</th>
-     									<td>2020-06-12</td>
+     									<td id="modal-todo-username">홍길동</td>
+     									<th>처리예정일</th>
+     									<td id="modal-todo-day">2020-06-12</td>
      								</tr>
      								<tr>
      									<th>상태</th>
-     									<td>처리예정</td>
-     									<th>예정일</th>
-     									<td>2020-07-12</td>
+     									<td id="modal-todo-status">처리예정</td>
+     									<th>완료일자</th>
+     									<td id="modal-todo-completed-day"></td>
      								</tr>
      								<tr>
      									<th style="vertical-align: middle;">내용</th>
-     									<td colspan="3"><small>내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 </small></td>
+     									<td colspan="3"><small id="modal-todo-content">내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 </small></td>
      								</tr>
      							</tbody>
      						</table>
      					</div>
      				</div>
    				</div>
-   				<div class="modal-footer">
-     				<button type="button" class="btn btn-success btn-sm">처리완료</button>
-     				<button type="button" class="btn btn-info btn-sm">처리중</button>
-     				<button type="button" class="btn btn-secondary btn-sm">보류</button>
-     				<button type="button" class="btn btn-danger btn-sm">취소</button>
+   				<div class="modal-footer" >
+   					<span id="btn-todo-modify" style="display: none">
+	     				<button type="button" class="btn btn-success btn-sm" onclick="updateTodoStatus('처리완료')">처리완료</button>
+	     				<button type="button" class="btn btn-info btn-sm" onclick="updateTodoStatus('처리중')">처리중</button>
+	     				<button type="button" class="btn btn-secondary btn-sm" onclick="updateTodoStatus('보류')">보류</button>
+	     				<button type="button" class="btn btn-danger btn-sm" onclick="updateTodoStatus('삭제')">삭제</button>
+   					</span>
      				<button type="button" class="btn btn-outline-dark btn-sm" data-dismiss="modal">닫기</button>
    				</div>
  			</div>
@@ -119,17 +123,51 @@
 	}
 	
 	function detailTodo(todoNo) {
+		$("#btn-todo-modify").css("display", "none");
 		var xhr = new XMLHttpRequest;
 		
 		xhr.onreadystatechange = function() {
 			if (xhr.readyState == 4 && xhr.status == 200) {
 				var text = xhr.responseText;
-				console.log(text);
+				var resText = JSON.parse(text);
+				loadDetailTable(resText);
 			}
 		}
 		
-		xhr.open("get", "detail.hta?todoNo=" + todoNo);
+		xhr.open("get", "todo/detail.hta?todoNo=" + todoNo);
 		xhr.send();
+	}
+	
+	function updateTodoStatus(status) {
+		var no = $("#modal-todo-no").text();
+		var xhr = new XMLHttpRequest;
+		
+		xhr.onreadystatechange = function() {
+			if (xhr.readyState == 4 && xhr.status == 200) {
+				var data = JSON.parse(xhr.responseText);
+				loadDetailTable(data)
+				$("#card-todo-status-" + data.no).text(data.status);
+				$("#card-todo-status-" + data.no).attr("class", "badge " + data.statusClass);
+			}
+		}
+		
+		xhr.open("get", "todo/updatestatus.hta?todono=" + no + "&status=" + status);
+		xhr.send();
+		
+	}
+	
+	function loadDetailTable(text) {
+		$("#modal-todo-no").text(text.no);
+		$("#modal-todo-title").text(text.title);
+		$("#modal-todo-username").text(text.userName);
+		$("#modal-todo-day").text(text.day);
+		$("#modal-todo-status").text(text.status);
+		$("#modal-todo-completed-day").text(text.completedDay);
+		$("#modal-todo-content").text(text.content);
+				
+		if (text.canModify) {
+			$("#btn-todo-modify").css("display", "");
+		}
 	}
 </script>
 </body>
