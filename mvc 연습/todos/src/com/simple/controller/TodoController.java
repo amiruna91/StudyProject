@@ -61,10 +61,11 @@ public class TodoController {
 	@RequestMapping("/todo/list.hta")
 	public ModelAndView list(HttpServletRequest req, HttpServletResponse res) throws Exception {
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("todos.jsp");
-		
 		HttpSession session = req.getSession();
 		User user = (User) session.getAttribute("loginUser");
+		
+		mav.setViewName("todos.jsp");
+		
 		
 		int pageNo = NumberUtil.stringToInt(req.getParameter("pageNo"), 1);
 		int rows = NumberUtil.stringToInt(req.getParameter("rows"), 5);

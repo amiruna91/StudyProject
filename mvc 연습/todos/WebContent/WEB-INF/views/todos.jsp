@@ -15,8 +15,8 @@
 </head>
 <body>
 <div class="container">
+	<c:set var="position" value="todos" />
 	<%@ include file="nav.jsp" %>
-	
 	<!-- Content -->
 	<div class="row mb-3">
 		<div class="col-12">
