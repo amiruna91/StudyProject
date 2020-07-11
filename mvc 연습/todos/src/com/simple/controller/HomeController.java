@@ -18,7 +18,6 @@ import kr.co.jhta.mvc.view.JSONView;
 public class HomeController {
 
 	private TodoService todoService = new TodoService();
-	private JSONView jsonView = new JSONView();
 	
 	@RequestMapping("/home.hta")
 	public ModelAndView home(HttpServletRequest req, HttpServletResponse res) throws Exception {

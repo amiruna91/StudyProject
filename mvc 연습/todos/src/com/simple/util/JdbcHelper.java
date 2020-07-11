@@ -76,9 +76,10 @@ public class JdbcHelper {
 	 * @param rowMapper ResultSet을 객체와 매핑시키는 RowMapper 구현객체
 	 * @param params 쿼리 실행에 필요한 값, 생략할 수 있다.
 	 * @return 조회된 결과, 조회된 값이 없는 경우 빈 List객체가 반환된다.
+	 * @throws Exception 
 	 * @throws SQLException
 	 */
-	public static <T> List<T> selectList(String sql, RowMapper<T> rowMapper, Object... params) {
+	public static <T> List<T> selectList(String sql, RowMapper<T> rowMapper, Object... params) throws SQLException {
 		return executeQuery(sql, rowMapper, params);
 	}
 	
@@ -172,7 +173,7 @@ public class JdbcHelper {
 		return resultSetHandering(executeQuery(), rowMapper);
 	}
 	
-	private static <T> List<T> executeQuery(String sql, RowMapper<T> rowMapper, Object...params) {
+	private static <T> List<T> executeQuery(String sql, RowMapper<T> rowMapper, Object...params)  {
 		try {
 			List<T> result = null;
 			before(sql);

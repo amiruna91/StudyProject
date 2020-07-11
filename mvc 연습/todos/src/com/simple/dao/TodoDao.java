@@ -14,6 +14,12 @@ import com.simple.util.JdbcHelper.RowMapper;
 import com.simple.util.QueryUtil;
 
 public class TodoDao {
+	
+	private static TodoDao self = new TodoDao();	// 정적변수 self에 TodoDao객체를 담아둔다.
+	private TodoDao() {} 							// 생성자의 외부 접근을 차단한다.
+	public static TodoDao getInstance() {			// 미리 생성된 TodoDao객체를 제공하는 기능이다.
+		return self;
+	}
 
 	public List<TodoDto> getRecentTodos() throws SQLException {
 		return JdbcHelper.selectList(QueryUtil.getSQL("todo.getRecentTodos"), new RowMapper<TodoDto>() {
@@ -58,7 +64,7 @@ public class TodoDao {
 				todo.getDay(), todo.getCompletedDay(), todo.getStatus(), todo.getNo());
 	}
 	
-	public int getTotalRows(String userId, String status, String keyword) throws SQLException {
+	public int getTotalRows(String userId, String status, String keyword) throws Exception {
 		String sql = "select count(*) cnt ";
 			   sql += "from sample_todos ";
 			   sql += "where user_id = '" + userId  +"' ";
