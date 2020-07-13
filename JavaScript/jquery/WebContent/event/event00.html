@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript">
+        function $(exp) {
+            const arr = document.querySelectorAll(exp);
+
+            return {
+                items: arr,
+                hide: function() {
+                    const elements = this.items;
+                    for (let i = 0; i < elements.length; i++) {
+                        let el = elements[i];
+                        el.style.display = "none";
+                    }
+                    return this;
+                },
+                show: function () {
+                    const elements = this.items;
+                    for (let i = 0; i < elements.length; i++) {
+                        let el = elements[i];
+                        el.style.display = "block";
+                    }
+                    return this;
+                }
+            }
+        }
+
+        function hideAll() {
+            $("p").hide();
+        }
+        function showAll() {
+            $("p").show();
+        }
+    </script>
+</head>
+<body>
+    <h1>함수 연습</h1>
+
+    <div>
+        <p>연습1</p>
+        <p>연습2</p>
+        <p>연습3</p>
+        <p>연습4</p>
+        <p>연습5</p>
+    </div>
+    <div>
+        <button onclick="hideAll()">전부 감추기</button>
+        <button onclick="showAll()">전부 보이기</button>
+    </div>
+</body>
+</html>

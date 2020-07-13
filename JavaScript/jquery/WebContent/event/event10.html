@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style type="text/css">
+        img {
+            width: 200px;
+
+            height: 200px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>무한 스크롤</h1>
+
+    <div id="image-box">
+        <img src="../resources/images/1.jpg">
+        <img src="../resources/images/2.jpg">
+        <img src="../resources/images/3.jpg">
+        <img src="../resources/images/4.jpg">
+        <img src="../resources/images/5.jpg">
+        <img src="../resources/images/6.jpg">
+        <img src="../resources/images/7.png">
+        <img src="../resources/images/8.png">
+    </div>
+    <script type="text/javascript" src="../resources/js/jquery-3.5.1.mis.js"></script>
+    <script type="text/javascript">
+        const images = ['1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg', '6.jpg', '7.png', '8.png'];
+        const imageBox = $("#image-box");
+        const windowHeight = $(window).height();
+        let documentHeight = $(document).height();
+
+        $(window).scroll(function () {
+            const scrollTop = $(window).scrollTop();
+            if (windowHeight + scrollTop + 50 > documentHeight) {
+                for (let i in images) {
+                    imageBox.append("<img src='../resources/images/" + images[i] + "'> ");
+                }
+                documentHeight = $(document).height();
+            }
+            console.log("문서높이", documentHeight, "창높이", windowHeight, "스크롤 높이", scrollTop);
+        })
+    </script>
+</body>
+
+</html>

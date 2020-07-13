@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>기타 필터 선택자</h1>
+    <table border="1" style="width: 100%;">
+        <thead>
+            <tr>
+                <th>판매순위</th>
+                <th>제목</th>
+                <th>저자</th>
+                <th>가격</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="top">
+                <td>1</td>
+                <td>자바의 정석</td>
+                <td>남궁 성</td>
+                <td>도우출판사</td>
+                <td><span>35,000</span>원 할인가:<span class="discount-price">32,0000</span>원</td>
+            </tr>
+            <tr class="top">
+                <td>2</td>
+                <td>Spring5 완벽하게 끝내기</td>
+                <td>홍길동</td>
+                <td>한빛미디어</td>
+                <td><span>35,000</span>원</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>이것이 자바다</td>
+                <td>신용권</td>
+                <td>한빛미디어</td>
+                <td><span>35,000</span>원 할인가:<span class="discount-price">32,0000</span>원</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>실전 리액트 프로그래밍</td>
+                <td>이재승</td>
+                <td>인사이트 출판사</td>
+                <td><span>32,000</span>원 할인가:<span class="discount-price">30,0000</span>원</td>
+            </tr>
+        </tbody>
+    </table>
+    <hr>
+    <div>
+        <button onclick="fn1()">제목에"자바"를 포함호고 있는 제품을 선택하자</button>
+        <button onclick="fn2()">할인하는 제품을 선택하자</button>
+        <button onclick="fn3()">판매순위가 1위가 아닌 제품 선택하기</button>
+        <button onclick="fn4()">할인하지 않는 제품 선택하기</button>
+        <button onclick="fn5()">한빛미디어에서 판매하는 제품중에서 순위가 가장 높은 제품 선택하기</button>
+    </div>
+<script type="text/javascript" src="../resources/js/jquery-3.5.1.mis.js"></script>
+<script type="text/javascript">
+    function fn1() {
+        $("tbody tr:contains('자바')").css("background-color", "yellow");
+    }
+    function fn2() {
+        $("tbody tr:has(span.discount-price)").css('background-color', 'yellow');
+    }
+    function fn3() {
+        $("tbody tr:not(.top)").css('background-color', 'yellow');
+    }
+    function fn4() {
+        $("tbody tr:not(:has(span.discount-price))").css("background-color", "yellow");
+    }
+    function fn5() {
+        $("tbody tr:contains('한빛미디어'):first").css('background-color', 'yellow');
+    }
+</script>
+</body>
+</html>

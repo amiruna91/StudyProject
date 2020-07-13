@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>이벤트 처리하기</h1>
+
+    <h3>사이트 목록</h3>
+    <ul id="site-list">
+        <li><a target="_blank" href="http://www.daum.net">다음</a></li>
+        <li><a href="http://www.naver.com">네이버</a></li>
+        <li><a href="http://www.google.com">구글</a></li>
+    </ul>
+
+    <h3>폼입렵값 검증</h3>
+    <form id="form-login" action="login.hta" method="POST">
+        <div>
+            <label>아이디</label> <input type="text" name="userid" />
+        </div>
+        <div>
+            <label>비밀번호</label> <input type="password" name="userpwd" />
+        </div>
+        <button type="submit">로그인</button>
+    </form>
+
+    <script type="text/javascript" src="../resources/js/jquery-3.5.1.mis.js"></script>
+    <script type="text/javascript">
+        $("#site-list a:eq(0)").on("click", function (event) {
+            event.preventDefault();
+            alert("기본동작 실행 방해");
+        })
+        $("#site-list a:eq(1)").on("click", function () {
+            alert("기본동작 실행 방해");
+            return false;
+        })
+        $("#site-list a:eq(2)").on("click", function () {
+
+        })
+
+        $("#form-login").on('submit', function () {
+            var userId = $("#form-login :input[name=userid]");
+            var userPwd = $("#form-login :input[name=userpwd]");
+
+            if (userId.val() == "") {
+                alert("아이디는 필수입력값입니다.");
+                userId.focus();
+                return false;
+            }
+            if (userPwd.val() == "") {
+                alert("비밀번호는 필수입력값입니다.");
+                userPwd.focus();
+                return false;
+            }
+
+            return true;
+        })
+    </script>
+</body>
+
+</html>
