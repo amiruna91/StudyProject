@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    div {
+      border: 2px dotted red;
+      padding: 20px;
+      margin: 10px;
+    }
+
+    p {
+      border: 1px solid black;
+      padding: 5px;
+      margin: 10px;
+    }
+
+    p.hot {
+      font-weight: bolder;
+      color: red;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>엘리먼트 추가하기</h1>
+  <div id="outter-box">
+    <div id="box">
+      <p>내용입니다.</p>
+      <p>내용입니다.</p>
+      <p>내용입니다.</p>
+    </div>
+  </div>
+  <script type="text/javascript" src="../resources/js/jquery-3.5.1.mis.js"></script>
+  <script type="text/javascript">
+    const contentForAppend = "<p class='hot'>Append</p>";
+    const contentForPrepend = "<p class='hot'>Prepend</p>";
+    const contentForAfter = "<p class='hot'>After</p>";
+    const contentForBefore = "<p class='hot'>Before</p>";
+
+    // $(target).xxx(컨텐츠)
+    $('#box').append(contentForAppend);
+    $('#box').prepend(contentForPrepend);
+    $('#box').after(contentForAfter);
+    $('#box').before(contentForBefore);
+
+    // $(컨텐츠),xxx(target);
+    $(contentForAppend).appendTo("#box");
+    $(contentForPrepend).prependTo("#box");
+    $(contentForAfter).insertAfter("#box");
+    $(contentForBefore).insertBefore("#box");
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+</head>
+
+<body>
+  <h1>조회하기</h1>
+
+  <div id="outter-box">
+    <h3>jQuery의 조회기능</h3>
+    <p>엘리먼트의 컨텐츠, 값, 속성 등을 조회하기</p>
+
+    <div id="box-1">
+      <input type="text" name="keyword" value="자바" readonly />
+    </div>
+    <div id="box-2">
+      <label>
+        <input type="checkbox" name="skill" value="c" disabled /> C언어
+      </label>
+      <label>
+        <input type="checkbox" name="skill" value="python" /> 파이썬
+      </label>
+    </div>
+    <div id="box-3">
+      <textarea name="summary" cols="40" rows="5">조회기능의 주요 메서드는 사용하기 편리하다</textarea>
+    </div>
+
+    <div>
+      <img src="../resources/images/1.jpg" alt="아이유" width="200" height="200">
+    </div>
+  </div>
+  <script type="text/javascript" src="../resources/js/jquery-3.5.1.mis.js"></script>
+  <script type="text/javascript">
+    // 엘리먼트의 텍스트 컨텐츠 조회하기
+    const text1 = $("h1").text();
+    const text2 = $("h3").text();
+    const text3 = $("p").text();
+    console.log(`첫번째 텍스트 ${text1}`);
+    console.log(`두번째 텍스트 ${text2}`);
+    console.log(`세번째 텍스트 ${text3}`);
+
+    // 엘리먼트의 html컨텐츠 조회하기
+    const html1 = $("div#outter-box").html();
+    const html2 = $("div#box-2 label:eq(0)").html();
+    console.log("html 컨텐츠1", html1);
+    console.log("html 컨텐츠2", html2);
+
+    // 폼요소의 값 조회하기
+    const val1 = $(":input[name=keyword]").val();
+    const val2 = $(":checkbox[name=skill]:eq(0)").val();
+    const val3 = $(":checkbox[name=skill]:eq(1)").val();
+    const val4 = $(":input[name=summary]").val();
+    console.log("폼입력요소의 값", val1);
+    console.log("폼입력요소의 값", val2);
+    console.log("폼입력요소의 값", val3);
+    console.log("폼입력요소의 값", val4);
+
+    // 프로퍼티 값 조회하기
+    const prop1 = $(":input[name=keyword]").prop("readonly"); // 읽기전용 여부
+    const prop2 = $(":checkbox[name=skill]:eq(0)").prop("disabled"); // 비활성화 여부
+    const prop3 = $(":checkbox[name=skill]:eq(1)").prop("disabled"); // 비활성화 여부
+    const prop4 = $(":checkbox[name=skill]:eq(0)").prop("checked"); // 체크 여부
+    const prop5 = $(":checkbox[name=skill]:eq(1)").prop("checked"); // 체크 여부
+
+    console.log("프로퍼티값 조회1", prop1);
+    console.log("프로퍼티값 조회2", prop2);
+    console.log("프로퍼티값 조회3", prop3);
+    console.log("프로퍼티값 조회4", prop4);
+    console.log("프로퍼티값 조회5", prop5);
+
+    // 속성값 조회하기(name, id, class, type, src, alt, href, tilte)
+    const attrVal1 = $('img').attr('src');
+    const attrVal2 = $('img').attr('alt');
+
+    console.log('속성값 조회1', attrVal1);
+    console.log('속성값 조회2', attrVal2);
+  </script>
+</body>
+
+</html>
