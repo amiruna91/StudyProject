@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <h1>배열의 주요 메서드</h1>
+
+  <script>
+    let scores = [80, 50, 90, 100, 54, 72, 82, 34];
+
+    // 저뭇의 합계를 계산하기
+    let sum = 0;
+    for (let i in scores) {
+      sum += scores[i];
+    }
+    console.log(`합계 ${sum}`);
+
+    // reuce(function(합계, 요소), 초기값)함수는
+    // 해당 배열의 집계결과를 반환한다.
+    scores.reduce(function (total, item) {
+      return total + item;
+    }, 0)
+    console.log(`합계 ${sum}`);
+  </script>
+</body>
+
+</html>
