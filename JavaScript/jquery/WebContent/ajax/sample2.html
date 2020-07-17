@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+<script type="text/javascript" src="../resources/js/jquery/jquery-3.5.1.min.js"></script>
+<script type="text/javascript">
+$(function() {
+	$.get("server/sample2.jsp", function(person) {
+		console.log(person.name);
+		console.log(person.tel);
+		console.log(person.email);
+		console.log(person.age);
+		console.log(person.married);
+		console.log(person.family[0], person.family[1], person.family[2]);
+	});
+});
+</script>
+</body>
+</html>

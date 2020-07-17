@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+<script type="text/javascript" src="../resources/js/jquery/jquery-3.5.1.min.js"></script>
+<script type="text/javascript">
+$(function() {
+	$.get("server/sample3.jsp", function(bookXMLDoc) {
+		var 제목 = $(bookXMLDoc).find('title').text();
+		var 저자 = $(bookXMLDoc).find('writer').text();
+		var 출판사 = $(bookXMLDoc).find('publisher').text();
+		var 가격 = $(bookXMLDoc).find('price').text();
+		var 출판일 = $(bookXMLDoc).find('pubdate').text();
+		
+		console.log("제목", 제목);
+		console.log("저자", 저자);
+		console.log("출판사", 출판사);
+		console.log("가격", 가격);
+		console.log("출판일", 출판일);
+	});
+});
+</script>
+</body>
+</html>

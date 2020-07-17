@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>코로나 19 시/도별 발생 현황</title>
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="../resources/css/bootstrap.min.css">
+  <!-- jQuery library -->
+  <script src="../resources/js/jquery-3.5.1.mis.js"></script>
+  <!-- Popper JS -->
+  <script src="../resources/js/popper.min.js"></script>
+  <!-- Latest compiled JavaScript -->
+  <script src="../resources/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+  <div class="container">
+    <div class="row mt-3">
+      <div class="col-6">
+        <h1>코로나 19 시/도별 발생 현황</h1>
+      </div>
+      <div class="col-3 offset-3">
+        <form class="form-inline mt-3">
+          <input type="date" class="form-control" id="search-date">
+          <button type="button" class="btn btn-primary btn-sm ml-3">조회</button>
+        </form>
+      </div>
+    </div>
+
+
+    <div class="row mt-3">
+      <div class="col-12 ">
+        <table class="table table-striped" id="covid19-table">
+          <thead>
+            <tr>
+              <th>구분</th>
+              <th>총 확진자 수</th>
+              <th>총 사망자 수</th>
+              <th>신규 확진자 수</th>
+              <th>지역내 감염</th>
+              <th>해외유입</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript">
+    $(function () {
+
+      function refreshTable() {
+        const reqParam = {
+          pageNo: 1,
+          startCreateDt: getSearchDate(),
+          endCreateDt: getSearchDate()
+        }
+
+        var $tbody = $('#covid19-table tbody');
+        $tbody.empty();
+
+        $.get("/covid19sido", reqParam, function (xmlDoc) {
+
+          var items = $(xmlDoc).find('item');
+          for (var i in items) {
+            let $item = $(items[i]);
+
+            let gubun = $item.find('gubun').text();
+            let defCnt = $item.find('defCnt').text();
+            let deathCnt = $item.find('deathCnt').text();
+            let incDec = $item.find('incDec').text();
+            let localOccCnt = $item.find('localOccCnt').text();
+            let overFlowCnt = $item.find('overFlowCnt').text();
+
+            var tr = `<tr>
+              <td>${gubun}</td>
+                <td>${defCnt}</td>
+                <td>${deathCnt}</td>
+                <td>${incDec}</td>
+                <td>${localOccCnt}</td>
+                <td>${overFlowCnt}</td>
+                </tr>`;
+
+            $tbody.append(tr);
+            if (gubun == '합계') {
+              break;
+            }
+
+          }
+        }, "xml");
+      }
+      $('#search-date').next().click(function () {
+        refreshTable();
+      })
+
+      function getSearchDate() {
+        var searchDate = $('#search-date').val();
+        if (searchDate > getDate().date) {
+          alert("금일 이후에 날짜의 데이터는 없습니다.")
+          return getDate().searchDate;
+
+        } else if (searchDate == "") {
+          var dateObj = getDate();
+
+          $("#search-date").val(dateObj.date);
+
+          return dateObj.searchDate;
+        } else {
+          return searchDate.replace(/-/g, "");
+        }
+      }
+
+      function getDate() {
+        var now = new Date();
+        var year = now.getFullYear();
+        var month = now.getMonth() + 1;
+        var day = now.getDate();
+
+        var date = year + "-" + (month < 10 ? '0' + month : month) + "-" + (day < 10 ? "0" + day : day);
+        var searchDate = date.replace(/-/g, "");
+
+        return {
+          date: date,
+          searchDate: searchDate
+        }
+      }
+
+      refreshTable();
+    })
+  </script>
+</body>
+
+</html>
