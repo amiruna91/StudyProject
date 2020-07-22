@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="SmsMessageSender" class="kr.co.jhta.di.service.SmsMessageSender">
+		<property name="company" value="SKT"></property>
+	</bean>
+	<bean id="UserServiceImpl" class="kr.co.jhta.di.service.step7.UserServiceImpl"></bean>
+	<bean id="EventNotificationServiceImpl" class="kr.co.jhta.di.service.step7.EventNotificationServiceImpl">
+		<property name="messageSender" ref="SmsMessageSender"></property>
+		<property name="userService" ref="UserServiceImpl"></property>
+	</bean>
+
+</beans>

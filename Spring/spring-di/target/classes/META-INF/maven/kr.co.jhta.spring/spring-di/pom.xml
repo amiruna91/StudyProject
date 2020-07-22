@@ -1,23 +1,22 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>kr.co.jhta.spring</groupId>
-  <artifactId>spring-di</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  
-  <properties>
-  <!-- 메이븐 프로젝트의 자바 버전을 java 8로 설정함 -->
-  	<maven.compiler.source>1.8</maven.compiler.source>
-  	<maven.compiler.target>1.8</maven.compiler.target>
-  	<!-- 메이븐을 이용해서 프로젝트 빌드할 때 한글 처리를 위한 인코딩 설정-->
-  	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-  	<project.reporing.outputEncoding>UTF-8</project.reporing.outputEncoding>
-  </properties>
-  
-  <dependencies>
-  	<dependency>
-	    <groupId>org.springframework</groupId>
-	    <artifactId>spring-context</artifactId>
-	    <version>5.2.7.RELEASE</version>
-	</dependency>
-  </dependencies>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>kr.co.jhta.spring-parent</groupId>
+		<artifactId>spring-pom</artifactId>
+		<version>0.0.1</version>
+	</parent>
+	<groupId>kr.co.jhta.spring</groupId>
+	<artifactId>spring-di</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>4.3.27.RELEASE</version>
+		</dependency>
+	</dependencies>
+
 </project>

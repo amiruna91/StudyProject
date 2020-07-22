@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+	 <!--
+    	ConsoleOutput 혹은 FileOutput
+    	Reporter 객체 생성 주문하기
+    	
+    	ConsoleOutput를 Reporter의 output 필드에 조립시키기
+      -->
+	
+	<!-- ConsoleOutput객체 생성 지시 -->
+	<!-- ConsoleOutput객체를 생성하고, "consoleOutput"라는 이름으로 관리해라. -->
+	<bean id="consoleOutput" class="kr.co.jhta.di.service.ConsoleOutput"></bean>
+	
+	<!-- FileOutput객체  -->
+	<bean id="fileOutput" class="kr.co.jhta.di.service.FileOutput">
+		<!-- 
+			생성된 객체의 필드에 정수, 실수, 불린, 문자열을 등의 값을 주입하는 경우에는
+			value="값" 속성을 사용해서 값을 주입한다.
+		 -->
+		<property name="directory" value="c:/temp"></property>
+		<property name="filename" value="step5.txt"></property>
+	</bean>
+	
+	<!-- Reporter객체 생성 지시 -->
+	<!-- Reporter객체를 생성하고, "reporter"라는 이름으로 관리해라  -->
+	<bean id="reporter" class="kr.co.jhta.di.service.step5.Reporter">
+		<!-- 생성된 Reporter객체의 output필드(멤버변수)에 
+		     "consoleOutput"라는 이름으로 참조되는 객체를 찾아서 연결지어라.
+		     생성된 객체의 필드에 스프링 컨테이너 내에 존재하는 다른 객체를 주입하는 경우에는
+		     ref="빈의 아이디" 속성을 사용해서 값을 주입한다.
+		-->
+		<property name="output" ref="fileOutput"></property>
+	</bean>
+	
+	
+	<!-- 
+		객체 생성 후에 기본생성자가 아닌 다른 생성자 메소드를 실행하도록 설정하기
+		* Report객체를 2번 생성하는 것은 실제 프로젝트에서는 하지 않음
+	 -->
+	<bean id="reporter2" class="kr.co.jhta.di.service.step5.Reporter">
+		<!-- 
+			<constructor-arg />태그는 생성자의 매개변수로 조립될 객체나 값을 정의할 때 사용한다.
+			<constructor-arg />태그가 하나도 없으면 객체 생성 후 기본 생성자가 실행되는 것이다.
+			<constructor-arg />태그의 갯수와 동일한 매개변수 갯수(타입)를 가지는 생성자가 실행된다.
+		 -->
+		<constructor-arg name="output2" ref="consoleOutput"></constructor-arg>
+	</bean>
+
+</beans>

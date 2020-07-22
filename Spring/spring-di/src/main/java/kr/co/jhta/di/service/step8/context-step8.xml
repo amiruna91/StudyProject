@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- SmsMessageSender , KakaoTalkMessageSender 객체 생성을 지시한다. -->
+	<bean id="smsMessageSender"
+		class="kr.co.jhta.di.service.SmsMessageSender">
+		<property name="company" value="SKT"></property>
+	</bean>
+	<bean id="kakaoTalkMessageSender"
+		class="kr.co.jhta.di.service.KakaoTalkMessageSender"
+		init-method="connect"
+		destroy-method="disconnect">
+		<property name="username" value="hong"></property>
+		<property name="password" value="1234"></property>
+	</bean>
+	<!-- UserService 인터페이스의 구현객체 생성을 지시한다. -->
+	<bean id="userService"
+		class="kr.co.jhta.di.service.step7.UserServiceImpl"></bean>
+	<!-- NoticeService 인터페이스의 구현객체 생성을 지시한다. -->
+	<bean id="noticeService"
+		class="kr.co.jhta.di.service.step8.NoticeServiceUsingSet">
+		<property name="userService" ref="userService"></property>
+		<property name="messagesenders">
+			<!-- 
+				* <set> 태그는 Set객체를 생성한다.
+				* <ref bean="빈의 아이디"> 태그는 빈의 아이디에 해당하는 객체를 찾아서
+				  Set객체의 요소로 추가한다.
+				* 멤버변수의 타입이 Set, List, 배열인 경우 각각 <set>, <list>, <array> 태그를
+				  사용해서 여러 개의 객체를 담을 수 있다.
+			 -->
+			<set>
+				<ref bean="smsMessageSender" />
+				<ref bean="kakaoTalkMessageSender" />
+			</set>
+		</property>
+	</bean>
+</beans>

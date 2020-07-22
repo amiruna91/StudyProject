@@ -1,10 +1,12 @@
-package kr.co.jhta.di.service.step4;
+package kr.co.jhta.di.service.step6;
 
 import kr.co.jhta.di.service.Output;
 
 public class Reporter {
 
 	private Output output;
+	
+	public Reporter() {}
 	
 	public void setOutput(Output output) {
 		this.output = output;
