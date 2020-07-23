@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+	<context:annotation-config></context:annotation-config>
+	<!-- 
+		지정된 패키지 및 그 하위 패키지에서
+		@Component, @Controller, @ControllerAdvice, @RestController,
+		@Service, @Repository 등의 Annotation이 부착된 모든 클래스를
+		검색해서 자동으로 스프링 컨테이너가 객체를 생성한다.
+	 -->
+	<context:component-scan base-package="kr.co.jhta.di"></context:component-scan>
+	<!-- 
+		location으로 지정된 경로에서 모든 properties 파일을 전부 읽어와서 
+		파일의 내용을 key와 value로 구분해서 그 정보를 가지고 있는 객체를
+		스프링 컨테이너가 생성한다.
+		
+		* 객체 생성을 수동으로 설정하는 경우
+		<bean class="x.y.z.SmsMessageSender">
+			<property name="company" value="${message.sender.sms.company}"
+		</bean>
+		
+		* 객체 생성을 자동으로 하는 경우
+		@Component
+		public class SmsMessageSend implements MessageSend {
+			@Value('${message.sender.sms.company}')
+			private String company;
+		}
+		
+	 -->
+	<context:property-placeholder location="classpath:/config/spring.properties" />
+</beans>
