@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+	<!-- 
+		Database와 연결을 담당하는 Connection 객체를 제공하는
+		Connection Pool(javax.sql.DataSource 인터페이스의 구현객체)객체를
+		생성시키기
+	 -->
+	 
+	 <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+	 	<property name="driverClassName" value="${db.driverClassName}"></property>
+	 	<property name="url" value="${db.url}"></property>
+	 	<property name="username" value="${db.username}"></property>
+	 	<property name="password" value="${db.password}"></property>
+	 </bean>
+	 
+	 <!-- 
+	 	Connection Pool 객체가 제공하는 Connection 객체를 이용해서 
+	 	DB Access 작업을 처리하는 BookDao객체 생성시키기
+	  -->
+	<bean id="bookDao" class="kr.co.jhta.dao.BookDao">
+		<property name="ds" ref="dataSource"></property>
+	</bean>
+	 
+	 <!-- 
+	 	spring의 환경설정 파일 로드하기
+	 		* Database 연결 정보
+	 		* 국제화와 관련된 메세지
+	 		* 여러 에러 상황에 대한 에러 메세지
+	 		* 프로그램 실행시 사용되는 다양한 상수값(특정 디렉토리 경로, 최대 업로드 파일 사이즈)
+	  -->
+	<context:property-placeholder location="classpath:/spring/config/database.properties" />
+</beans>

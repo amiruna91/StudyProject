@@ -1,0 +1,41 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>kr.co.jhta.spring-parent</groupId>
+		<artifactId>spring-pom</artifactId>
+		<version>0.0.1</version>
+	</parent>
+	<groupId>kr.co.jhta.spring</groupId>
+	<artifactId>spring-database</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>4.3.27.RELEASE</version>
+		</dependency>
+		<!-- 
+			jdbc를 활용한 DB Access 작업을 지원하는 라이브러리
+			* 단순한 Connection Pool 지원
+			* Jdbc 작업을 단순화 시킨 JdbcTemplate 클래스 지원
+		 -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+			<version>4.3.27.RELEASE</version>
+		</dependency>
+		<!-- 
+			트랜잭션 처리를 지원하는 라이브러리
+			* 다양한 DB Access 작업에 대한 선언적 트랜잭션 처리를 지원한다.
+			* DB Access 기술이 달라지더라도 동일한 방식으로 트랜잭션처리가 가능한다.
+		 -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+			<version>4.3.27.RELEASE</version>
+		</dependency>
+	</dependencies>
+</project>
