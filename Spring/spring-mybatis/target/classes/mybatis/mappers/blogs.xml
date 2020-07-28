@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="kr.co.jhta.dao.BlogDao">
+	<insert id="insertBlog" parameterType="Blog">
+		insert into spring_blogs
+		(blog_no, blog_title, blog_writer, blog_content)
+		values
+		(spring_blog_seq.nextval, #{title}, #{writer.id}, #{content})
+	</insert>
+	
+	<select id="getBlogByNo" parameterType="int" resultType="Blog">
+		select 
+			A.blog_no 				as no
+			, A.blog_title 			as title
+			, A.blog_writer			as "writer.id"
+			, B.user_name			as "writer.name"
+			, B.user_email			as "writer.email"
+			, A.blog_content		as content
+			, A.blog_likes			as likes
+			, A.blog_comment_counts	as commentCounts
+			, A.blog_create_date	as createdDate
+		from
+			spring_blogs A, spring_users B
+		where
+			A.blog_writer = B.user_id
+			and A.blog_no = #{value}
+	</select>
+	
+	<select id="getBlogs" resultType="Blog">
+		select 
+			A.blog_no 				as no
+			, A.blog_title 			as title
+			, A.blog_writer			as "writer.id"
+			, B.user_name			as "writer.name"
+			, B.user_email			as "writer.email"
+			, A.blog_content		as content
+			, A.blog_likes			as likes
+			, A.blog_comment_counts	as commentCounts
+			, A.blog_create_date	as createdDate
+		from
+			spring_blogs A, spring_users B
+		where
+			A.blog_writer = B.user_id
+	</select>
+	
+	<select id="getBlogsByWriter" parameterType="string" resultType="Blog">
+		select 
+			A.blog_no 				as no
+			, A.blog_title 			as title
+			, A.blog_writer			as "writer.id"
+			, B.user_name			as "writer.name"
+			, B.user_email			as "writer.email"
+			, A.blog_content		as content
+			, A.blog_likes			as likes
+			, A.blog_comment_counts	as commentCounts
+			, A.blog_create_date	as createdDate
+		from
+			spring_blogs A, spring_users B
+		where
+			A.blog_writer = B.user_id
+			and A.blog_writer like '%' || #{value} || '%'
+	</select>
+	
+	<update id="updateBlog" parameterType="Blog">
+		update spring_blogs
+		set
+			blog_title = #{title},
+			blog_content = #{content}
+		where blog_no = #{no} 
+	</update>
+	
+	<delete id="deleteBlog" parameterType="int">
+		delete from spring_blogs
+		where blog_no = #{no}
+	</delete>
+</mapper>

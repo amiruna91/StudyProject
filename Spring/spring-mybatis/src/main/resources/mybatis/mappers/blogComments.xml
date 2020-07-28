@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="kr.co.jhta.dao.BlogCommentDao">
+
+	<insert id="insertComment" parameterType="Comment">
+		insert into spring_blog_comments
+		(comment_no, comment_writer, comment_content, blog_no)
+		values
+		(SPRING_COMMENT_SEQ.nextval, #{writer.id}, #{content}, #{blog.no})
+	</insert>
+	
+	<select id="getCommentsByBlogNo" parameterType="int" resultType="Comment">
+		select
+		from
+		where 
+	</select>
+	
+	<select id="getCommentsByWriter" parameterType="string" resultType="Comment">
+		select
+		from
+		where 
+	</select>
+	
+	<delete id="deleteComment" parameterType="int">
+		delete from spring_blog_comments
+		where blog_no = #{value}
+	</delete>
+</mapper>
