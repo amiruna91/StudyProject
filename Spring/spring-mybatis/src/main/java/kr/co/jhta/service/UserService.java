@@ -1,9 +1,14 @@
 package kr.co.jhta.service;
 
+import java.util.List;
+
+import kr.co.jhta.vo.Blog;
+import kr.co.jhta.vo.Comment;
 import kr.co.jhta.vo.User;
 
 /**
- * 사용자에게 제공되는 서비스를 정의하는 인터페이스
+ * 신규가입, 로그인, 내가 작성한 게시글 조회, 내가 작성한 댓글 조회,
+ * 내 정보 변경, 계정 삭제 서비스를 정의한다.
  * @author USER
  *
  */
@@ -24,4 +29,9 @@ public interface UserService {
 	 * @return 인증된 사용자 정보가 포함된 User객체, null이 반홤될 수 있음
 	 */
 	User login(String id, String password);
+	List<Blog> getMyBlogs(String userId);
+	List<Comment> getMyComments(String userId);
+	void updateUserInfo(User user);
+	void deleteMyAccount(String userId);
+	
 }

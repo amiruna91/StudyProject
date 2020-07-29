@@ -6,10 +6,11 @@ import kr.co.jhta.vo.Blog;
 
 public interface BlogDao {
 
-	void insertBlog(Blog blog);
 	Blog getBlogByNo(int blogNo);
 	List<Blog> getBlogs();
 	List<Blog> getBlogsByWriter(String writer);
+	void insertBlog(Blog blog);
 	void updateBlog(Blog blog);
-	void deleteBlog(int no);
+	void deleteBlogByNo(int blogNo);
+	void deleteBlogByWriter(String writer);
 }

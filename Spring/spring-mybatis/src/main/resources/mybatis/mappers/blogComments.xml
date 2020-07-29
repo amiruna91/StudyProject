@@ -2,6 +2,40 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="kr.co.jhta.dao.BlogCommentDao">
 
+	<select id="getCommentsByBlogNo" parameterType="int" resultType="Comment">
+		select
+			A.comment_no	as no
+			, A.comment_writer	as "writer.id"
+			, B.user_name		as "writer.name"
+			, A.comment_content	as content
+			, A.blog_no			as "blog.no"
+			, A.comment_create_date	as createdDate
+		from
+			spring_blog_comments A, spring_users B
+		where 
+			A.comment_writer = B.user_id
+		order by
+			A.comment_no asc
+	
+	</select>
+	
+	<select id="getCommentsByWriter" parameterType="string" resultType="Comment">
+		select
+			A.comment_no	as no
+			, A.comment_writer	as "writer.id"
+			, B.user_name		as "writer.name"
+			, A.comment_content	as content
+			, A.blog_no			as "blog.no"
+			, A.comment_create_date	as createdDate
+		from
+			spring_blog_comments A, spring_users B
+		where 
+			A.comment_writer = B.user_id
+			and A.comment_writer = #{value}
+		order by
+			A.comment_no asc
+	</select>
+	
 	<insert id="insertComment" parameterType="Comment">
 		insert into spring_blog_comments
 		(comment_no, comment_writer, comment_content, blog_no)
@@ -9,20 +43,18 @@
 		(SPRING_COMMENT_SEQ.nextval, #{writer.id}, #{content}, #{blog.no})
 	</insert>
 	
-	<select id="getCommentsByBlogNo" parameterType="int" resultType="Comment">
-		select
-		from
-		where 
-	</select>
+	<delete id="deleteCommentByNo" parameterType="int">
+		delete from spring_blog_comments
+		where comment_no = #{value}
+	</delete>
 	
-	<select id="getCommentsByWriter" parameterType="string" resultType="Comment">
-		select
-		from
-		where 
-	</select>
-	
-	<delete id="deleteComment" parameterType="int">
+	<delete id="deleteCommentByBlogNo" parameterType="int">
 		delete from spring_blog_comments
 		where blog_no = #{value}
+	</delete>
+	
+	<delete id="deleteCommentByWriter" parameterType="string">
+		delete from spring_blog_comments
+		where comment_writer = #{value}
 	</delete>
 </mapper>

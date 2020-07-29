@@ -22,6 +22,27 @@
 		<property name="username" value="${db.username}"></property>
 		<property name="password" value="${db.password}"></property>
 	</bean>
+	
+	<!-- 
+		트랜잭션매니저 빈 설정
+		* TransactionManager는 선언적 트랜잭션처리를 지원하는 객체다.
+		* 트랜잭션처리가 필요한 클래스에 @Transactional 어노테이션을 부착해두면
+		  그 클래스의 메서드가 실행될 때마다 자동으로 트랜잭션 처리를 지원한다.
+		  - 메서드 실행 중 예외가 발생하면 메서드내에서 실행했던 모든 작업을 rollback처리 한다.
+		  - 메서드가 예외없이 완료되면 메서드내에서 실행 했던 모든 작업을 commit처리 한다.
+		* spring-jdbc, mybatis 기술을 사용해서 Databse Access작업을 구현했을 때는
+		  DataSourceTransactionManager를 스프링의 빈으로 등록한다.
+	 -->
+	 <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+	 	<property name="dataSource" ref="dataSource" />
+	 </bean>
+	 <!-- 
+	 	트랜잭션 처리가 필요한 대상 클래스를 선정할 때
+	 	@Transactional 어노테이션이 부착된 클래스를 검색해서
+	 	그 클래스의 모든 메서드가 실행될 때마다
+	 	위에서 정의한 트랜잭션매니저의 트랜잭션처리 기능이 실행되게 한다.
+	  -->
+	 <tx:annotation-driven transaction-manager="txManager" />
 
 	<!-- 
 		mybatis 핵심객체인 SqlSessionFactory를 스프링의 bean으로 등록시키는 
@@ -38,17 +59,6 @@
 		<property name="configLocation" value="classpath:/mybatis/mybatis-config.xml"></property>
 		<property name="dataSource" ref="dataSource"></property>
 	</bean>
-	
-	 <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-	 	<property name="dataSource" ref="dataSource" />
-	 </bean>
-	 <!-- 
-	 	트랜잭션 처리가 필요한 대상 클래스를 선정할 때
-	 	@Transactional 어노테이션이 부착된 클래스를 검색해서
-	 	그 클래스의 모든 메서드가 실행될 때마다
-	 	위에서 정의한 트랜잭션매니저의 트랜잭션처리 기능이 실행되게 한다.
-	  -->
-	 <tx:annotation-driven transaction-manager="txManager" />
 	
 	<!-- 
 		<mybatis-spring:scan base-package="패기지명" /> 태그는

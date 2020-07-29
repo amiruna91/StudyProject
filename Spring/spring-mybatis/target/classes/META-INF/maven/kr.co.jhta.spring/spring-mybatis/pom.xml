@@ -18,7 +18,7 @@
 			<artifactId>spring-context</artifactId>
 			<version>4.3.27.RELEASE</version>
 		</dependency>
-		
+
 		<!-- spring의 database access 지원 라이브러리 -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -30,7 +30,24 @@
 			<artifactId>spring-tx</artifactId>
 			<version>4.3.27.RELEASE</version>
 		</dependency>
-		
+
+		<!-- 단위테이스, 통합테스트를 위한 라이브러리 -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>4.3.27.RELEASE</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api -->
+		<!-- https://mvnrepository.com/artifact/junit/junit -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.13</version>
+			<scope>test</scope>
+		</dependency>
+
+
+
 		<!-- SQL Mapper Framework 라이브러리 -->
 		<dependency>
 			<groupId>org.mybatis</groupId>
@@ -38,7 +55,7 @@
 			<version>3.5.5</version>
 		</dependency>
 
-		<!-- mybatis와 spring 연동을 지원하는 라이브러리-->
+		<!-- mybatis와 spring 연동을 지원하는 라이브러리 -->
 		<dependency>
 			<groupId>org.mybatis</groupId>
 			<artifactId>mybatis-spring</artifactId>

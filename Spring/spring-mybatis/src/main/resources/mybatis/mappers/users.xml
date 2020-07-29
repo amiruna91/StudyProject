@@ -51,6 +51,21 @@
 			user_id = #{value}
 	</select>
 	
+	<select id="getUsersByName" parameterType="string" resultType="User">
+		select
+			user_id as id
+			, user_name as name
+			, user_password as password
+			, user_email as email
+			, user_created_date as createdDate
+		from
+			spring_users
+		where
+			user_name = #{value}
+		order by 
+			user_name asc
+	</select>
+	
 	<insert id="insertUser" parameterType="User">
 		insert into spring_users
 		(user_id, user_name, user_password, user_email)
@@ -63,18 +78,6 @@
 		where user_id = #{value}
 	</delete>
 	
-	<select id="getUsersByName" parameterType="string" resultType="User">
-		select
-			user_id as id
-			, user_name as name
-			, user_password as password
-			, user_email as email
-			, user_created_date as createdDate
-		from
-			spring_users
-		where
-			user_name like '%' || #{value} || '%'
-	</select>
 	
 	<update id="updateUser" parameterType="User">
 		update spring_users
