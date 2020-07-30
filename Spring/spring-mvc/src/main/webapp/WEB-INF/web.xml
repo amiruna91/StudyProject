@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee https://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+
+	<!-- Root WebApplicationContext(스프링 컨테이너) 설정 -->
+	<!-- 
+		<context-param> 트그를 사용해서 스프링 빈 설정파일의 경로를 지정한다.
+			* <param-name> 태그에 적는 contextConfigLocation은 고정된 값이다.
+		<listener> 태그를 사용해서 웹서버에서 특정 이벤트 발생시 실행되는
+		리스너 클래스를 지정할 수 있다.
+			* ContextLoaderListener는 ServletContext객체가 생성되는 리스너 클래스
+			* ServletContext객체는 웹서버가 켜질 때 생성되고, 웹서버가 중지될 때 사라진다.
+			* ContextLoaderListener은 웹서버가 켜질 때 자동으로 실행되고,
+			  Spring Container를 생성한다.
+			* Spring Container는 <context-param> 태그에 정의된 설정파일을 읽어서 
+			  객체를 생성하고, 조립한다.
+			* ContextLoaderListener이 생성한 스프링 컨테이너는 루트 스프링 컨테이너가 된다.
+			* 루트 스프링 컨테이너에서 생성/조립된 객체는
+			  자식 스프링 컨테이너(DispatcherServlet이 생성한 스프링 컨테이너)에서
+			  참조할 수 있다.
+			* 자식 스프링 컨테이너의 루트 스프링 컨테이너의 객체를 검색해서
+			  자식 스프링 컨테이너가 생성한 객체데 조립시킬 수 있다.
+	 -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>/WEB-INF/spring/context-root.xml</param-value>
+	</context-param>
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	<!-- Child WebApplicationContext(스프링 컨테이너) 설정 -->
+	<!-- 
+		FrontController 역할을 수행하는 DispatcherServlet 톰캣에 배포하기
+			* DispatcherServlet는 Spring Container를 생성하고,
+			  context-mvc.xml을 읽어서 설정파일에 정의된 객체를 생성하고 조립한다.
+	 -->
+	<servlet>
+		<servlet-name>frontController</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/spring/context-mvc.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>frontController</servlet-name>
+		<url-pattern>*.do</url-pattern>
+	</servlet-mapping>
+</web-app>
