@@ -24,7 +24,7 @@
 	
 	<select id="selectBoards" resultType="Board">
 		select 
-			baord_no			as no
+			board_no			as no
 			, board_title		as title
 			, board_writer		as writer
 			, board_likes		as likes
@@ -36,9 +36,9 @@
 		order by
 			board_no desc
 	</select>
-	<select id="selectBoard" parameterType="int" resultType="Board">
+	<select id="selectBoard" parameterType="long" resultType="Board">
 		select 
-			baord_no			as no
+			board_no			as no
 			, board_title		as title
 			, board_writer		as writer
 			, board_password	as password

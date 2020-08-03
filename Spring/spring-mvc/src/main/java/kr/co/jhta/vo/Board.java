@@ -61,6 +61,14 @@ public class Board {
 	public String getFilename() {
 		return filename;
 	}
+	
+	public String getOriginalFileName() {
+		if (filename == null) {
+			return null;
+		}
+		
+		return filename.substring(13);
+	}
 
 	public void setFilename(String filename) {
 		this.filename = filename;

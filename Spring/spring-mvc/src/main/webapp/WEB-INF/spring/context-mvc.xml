@@ -7,12 +7,48 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 
+	<!-- 
+		@Autowired, @Resource, @Value, @PostConstructor, @PreDestory 등의
+		어노테이션을 감지해서 스프링 컨테이너가 관리하는 빈(객체)들간의 의존성 주입 등의
+		작업을 수행하는 xxxAnnotationProcessor가 스프링 빈으로 등록된다.
+		
+	 -->
 	<context:annotation-config />
-	<context:component-scan base-package="kr.co.jhta.web"/>
+	<!-- 
+		@Controller 어노테이션이 부착된 컨트롤러 클래스들을
+		kr.co.jhta.web 패키지에서 검색해서 스프링의 빈으로 등록한다.
+	 -->
+	<context:component-scan base-package="kr.co.jhta.web, kr.co.jhta.view"/>
 	
+	<!-- 
+		@Controller, @RestController, @ControllerAdvice, @RequestMapping,
+		@RequestParam, @ModelAttribute, @PathVariable, @Valid 등
+		spring MVC 관련 어노테이션을 감지해서 적절한 작업을 수행하는 클래스들이
+		스프링의 빈을 등록된다.
+	 -->
 	<mvc:annotation-driven/>
+	<!-- 
+		<mvc:view-resolvers />태그에는 다양한 ViewResolver관련 설정을 포함할 수 있다.
+		<mvc:jsp prefix="" suffix="" />은 뷰템플릿(모델의 데이터가 표현되는 곳)을 
+		jsp일 때 사용되는 태그다.
+		<mvc:jsp /> InternalResourceViewResolver를 스프링의 빈으로 등록하고,
+		jsp 페이지를 검색할 때 prefix와 suffix에 설정된 값을 사용한다.
+	 -->
 	<mvc:view-resolvers>
 		<mvc:jsp prefix="/WEB-INF/views/" suffix=".jsp"/>
 	</mvc:view-resolvers>
+	<!-- 
+		* multipart요청(폼에서 첨부파일 업로드가 존재하는 요청)을 처리하는 
+		  CommonsMultipartResolver를 스프링의 빈으로 등록한다.
+		* CommonsMultipartResolver는 Apache commons-fileupload.jar와 commons-io.jar를
+		  이용해서 multipart요청을 처리한다.
+	 -->
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+	</bean>
+	
+	<context:property-placeholder
+		location="/WEB-INF/spring/mvc.properties"/>
+	
 	
 </beans>
