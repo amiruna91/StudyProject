@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="kr.co.jhta.dao.ProductDao">
+	<insert id="insertProduct" parameterType="Product">
+		insert into spring_products
+		(product_no, category_id, product_name, product_price, product_discount_price)
+		values
+		(SPRING_PRODUCT_SEQ.nextval, #{category.id}, #{name}, #{price}, #{discountPrice})
+	</insert>
+	
+	<select id="getAllProducts" resultType="Product">
+		select
+			  product_no				as no
+			, category_id				as "category.id"
+			, product_name				as name
+			, product_price				as price
+			, product_discount_price	as discountPrice
+			, product_stock				as stock
+			, product_created_date		as createdDate
+		from
+			spring_products
+		order by
+			product_no asc
+	</select>
+	
+	<select id="getProductByCategoryId" parameterType="string" resultType="Product">
+		select
+			  product_no				as no
+			, category_id				as "category.id"
+			, product_name				as name
+			, product_price				as price
+			, product_discount_price	as discountPrice
+			, product_stock				as stock
+			, product_created_date		as createdDate
+		from
+			spring_products
+		where
+			category_id = #{value}
+	</select>
+	
+	<select id="getProductByNo" parameterType="long" resultType="Product">
+		select
+			  product_no				as no
+			, category_id				as "category.id"
+			, product_name				as name
+			, product_price				as price
+			, product_discount_price	as discountPrice
+			, product_stock				as stock
+			, product_created_date		as createdDate
+		from
+			spring_products
+		where
+			product_no = #{value}
+	</select>
+	
+	<update id="updateProduct" parameterType="Product">
+		update spring_products
+		set 
+			product_name = #{name},
+			product_price = #{price},
+			product_discount_price = #{discountPrice},
+			product_stock = #{stock},
+		where
+			product_no = #{no}
+	</update>
+</mapper>
+
+
+
+
+
+
+
+

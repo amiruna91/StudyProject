@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="kr.co.jhta.dao.OrderDao">
+	<insert id="insertOrder" parameterType="Order">
+		<selectKey keyProperty="no" resultType="long" order="BEFORE">
+			select spring_order_seq.nextval from dual
+		</selectKey>
+		insert into spring_orders
+		(order_no, order_username, order_tel)
+		values
+		(#{no}, #{username}, #{tel})
+	</insert>
+	
+	<insert id="insertOrderItem" parameterType="Item">
+		insert into spring_order_items
+		(item_no, order_no, product_no, item_price, item_amount)
+		values
+		(spring_order_seq.nextval, #{orderNo}, #{productNo}, #{price}, #{amount})
+	</insert>
+	
+	<insert id="insertOrderPayment" parameterType="Payment">
+		insert into spring_order_payments
+		(pay_no, pay_type, pay_account, order_no)
+		values
+		(spring_order_seq.nextval, #{type}, #{account}, #{orderNo})
+	</insert>
+	
+	<insert id="insertOrderDelivery" parameterType="Delivery">
+		insert into spring_order_delivery
+		(delivery_no, delivery_username, delivery_tel, delivery_address, order_no)
+		values
+		(spring_order_seq.nextval, #{username}, #{tel}, #{address}, #{orderNo})
+	</insert>
+</mapper>
+
+
+
+
+
+
+
+
