@@ -13,6 +13,7 @@
 		<typeAlias type="kr.co.jhta.vo.Order" alias="Order"/>
 		<typeAlias type="kr.co.jhta.vo.Payment" alias="Payment"/>
 		<typeAlias type="kr.co.jhta.vo.Product" alias="Product"/>
+		<typeAlias type="kr.co.jhta.vo.User" alias="User"/>
 	</typeAliases>
 	
 	<mappers>
@@ -20,5 +21,6 @@
 		<mapper resource="META-INF/mybatis/mappers/categories.xml" />
 		<mapper resource="META-INF/mybatis/mappers/products.xml" />
 		<mapper resource="META-INF/mybatis/mappers/Orders.xml" />
+		<mapper resource="META-INF/mybatis/mappers/users.xml" />
 	</mappers>
 </configuration>

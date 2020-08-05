@@ -14,6 +14,7 @@
 			<h1>사내 자유 게시판</h1>
 			<p>자신의 이야기를 적어주세요</p>
 			<p><a href="board/list.do" class="btn btn-primary">바로가기</a></p>
+			<p><a href="signup.do" class="btn btn-danger">회원가입</a></p>
 		</div>
 	</div>
 </body>

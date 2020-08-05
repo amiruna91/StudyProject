@@ -156,6 +156,13 @@
 			<version>1.4</version>
 		</dependency>
 
+		<!-- 폼 입력값 유효성 검증을 지원하는 라이브러리 -->
+		<dependency>
+			<groupId>org.hibernate.validator</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>6.1.5.Final</version>
+		</dependency>
+
 	</dependencies>
 	<build>
 		<plugins>

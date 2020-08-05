@@ -60,7 +60,7 @@
 			product_name = #{name},
 			product_price = #{price},
 			product_discount_price = #{discountPrice},
-			product_stock = #{stock},
+			product_stock = #{stock}
 		where
 			product_no = #{no}
 	</update>
