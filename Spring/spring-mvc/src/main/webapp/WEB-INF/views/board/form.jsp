@@ -24,10 +24,6 @@
 								<input type="text" class="form-control" name="title" id="board-title" />
 							</div>
 							<div class="form-group">
-								<label>작성자</label>
-								<input type="text" class="form-control" name="writer" id="board-writer" />
-							</div>
-							<div class="form-group">
 								<label>내용</label>
 								<textarea rows="6" class="form-control" name="content"></textarea>
 							</div>

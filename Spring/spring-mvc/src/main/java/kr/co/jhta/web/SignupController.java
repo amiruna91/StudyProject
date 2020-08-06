@@ -4,6 +4,7 @@ import java.util.Date;
 
 import javax.validation.Valid;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import kr.co.jhta.form.UserForm;
 import kr.co.jhta.service.UserService;
+import kr.co.jhta.vo.User;
 
 
 @Controller
@@ -45,6 +47,13 @@ public class SignupController {
 		if (errors.hasErrors()) {
 			return "form";	// 입력화면으로 내부이동하기
 		}
+		 
+		// 유효성 체크를 통과한 입력값을 User객체에 복사한다.
+		User user = new User();
+		BeanUtils.copyProperties(userForm, user);
+		
+		// 회원가입 처리
+		userService.addNewUser(user);
 		
 		return "redirect:/home.do";
 	}

@@ -26,7 +26,11 @@
 		spring MVC 관련 어노테이션을 감지해서 적절한 작업을 수행하는 클래스들이
 		스프링의 빈을 등록된다.
 	 -->
-	<mvc:annotation-driven/>
+	<mvc:annotation-driven>
+		<mvc:argument-resolvers>
+			<bean class="kr.co.jhta.resolver.UserArgumentResolver"></bean>
+		</mvc:argument-resolvers>
+	</mvc:annotation-driven>
 	<!-- 
 		<mvc:view-resolvers />태그에는 다양한 ViewResolver관련 설정을 포함할 수 있다.
 		<mvc:jsp prefix="" suffix="" />은 뷰템플릿(모델의 데이터가 표현되는 곳)을 

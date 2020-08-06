@@ -17,7 +17,6 @@ import org.springframework.web.multipart.MultipartFile;
 public class BoardForm {
 
 	private String title;
-	private String writer;
 	private String content;
 	private MultipartFile upfile;
 	private String password;
@@ -30,14 +29,6 @@ public class BoardForm {
 
 	public void setTitle(String title) {
 		this.title = title;
-	}
-
-	public String getWriter() {
-		return writer;
-	}
-
-	public void setWriter(String writer) {
-		this.writer = writer;
 	}
 
 	public String getContent() {

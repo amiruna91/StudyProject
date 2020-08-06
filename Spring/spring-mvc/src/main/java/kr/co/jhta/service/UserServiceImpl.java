@@ -21,9 +21,21 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void addNewUser(User user) {
-		// TODO Auto-generated method stub
-		
+		userDao.insertUser(user);
 	}
-	
+
+	@Override
+	public User login(String userId, String userPwd) {
+		User user = userDao.getUserById(userId);
+		
+		if (user == null) {
+			return null;
+		}
+		
+		if (!user.getPassword().equals(userPwd)) {			
+			return null;
+		}
+		return user;
+	}
 	
 }
