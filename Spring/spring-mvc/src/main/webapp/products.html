@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="/resources/bootstrap/css/bootstrap.min.css">
+<title>Spring Rest</title>
+</head>
+<body>
+<div class="container mt-3 mt-5">
+	<div class="row">
+		<div class="col-12">
+			<div class="card">
+				<div class="card-header">상품리스트</div>
+				<div class="card-body">
+					<table class="table" id="table-product-list">
+						<colgroup>
+							<col width="10%">
+							<col width="50%">
+							<col width="20%">
+							<col width="20%">
+						</colgroup>
+						<thead>
+							<tr>
+								<th>번호</th>
+								<th>이름</th>
+								<th>가격</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody></tbody>
+					</table>
+				</div>
+				<div class="card-footer">
+					<a href="/home.do" class="btn btn-primary">홈</a>
+					<button class="float-right btn btn-success" id="btn-open-form">상품등록</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="modal" id="modal-product">
+  		<div class="modal-dialog modal-lg">
+    		<div class="modal-content">
+      			<div class="modal-header">
+        			<h4 class="modal-title">상품상세 정보</h4>
+        			<button type="button" class="close" data-dismiss="modal">&times;</button>
+      			</div>
+      			<div class="modal-body">
+        			<table class="table table-bordered" id="table-product">
+						<colgroup>
+							<col width="15%">
+							<col width="35%">
+							<col width="15%">
+							<col width="35%">
+						</colgroup>
+						<tbody>
+							<tr>
+								<th>번호</th><td></td>
+								<th>재고</th><td></td>
+							</tr>
+							<tr>
+								<th>이름</th><td colspan="3"></td>
+							</tr>
+							<tr>
+								<th>가격</th><td></td>
+								<th>할인가격</th><td></td>
+							</tr>
+						</tbody>
+					</table>
+      			</div>
+      			<div class="modal-footer">
+        			<button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+      			</div>
+    		</div>
+  		</div>
+	</div>
+	
+	<div class="modal" id="modal-product-form">
+  		<div class="modal-dialog modal-lg">
+    		<div class="modal-content">
+      			<div class="modal-header">
+        			<h4 class="modal-title">상품정보 입력폼</h4>
+        			<button type="button" class="close" data-dismiss="modal">&times;</button>
+      			</div>
+      			<div class="modal-body">
+        			<form id="product-form" method="post" action="/rest/products.do">
+						<div class="form-group">
+							<label>카테고리</label>
+							<select class="form-control" name="catId" id="category-id">
+								<option value="" selected disabled> -- 선택하세요 --</option>
+								<option value="디지털"> 디지털제품</option>
+								<option value="생활가전"> 대형/생활가전</option>
+								<option value="가구"> 가구/침구/인테리어</option>
+							</select>
+						</div>
+						<div class="form-group">
+							<label>상품 이름</label>
+							<input type="text" class="form-control" name="name" id="product-name"/>
+						</div>
+						<div class="form-group">
+							<label>상품 가격</label>
+							<input type="number" class="form-control" name="price" id="product-price"/>
+						</div>
+						<div class="form-group">
+							<label>상품 할인가격</label>
+							<input type="number" class="form-control" name="discountPrice" id="product-discount-price"/>
+						</div>
+					</form>
+      			</div>
+      			<div class="modal-footer">
+        			<button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+        			<button type="button" class="btn btn-primary">등록</button>
+      			</div>
+    		</div>
+  		</div>
+	</div>
+</div>
+<script type="text/javascript" src="/resources/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="/resources/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+$(function() {
+	$.ajax({
+		type:"GET",
+		url:"/json/products.do",
+		dataType:"json",
+		success:function(products) {
+			var $tbody = $("#table-product-list tbody").empty();
+			
+			$.each(products, function(index, product) {
+				var tr = "<tr>";
+				tr += "<td>"+product.no+"</td>";
+				tr += "<td>"+product.name+"</td>";
+				tr += "<td>"+product.price+"</td>";
+				tr += "<td><button class='btn btn-primary btn-sm' data-no='"+product.no+"'>상세</button> <button class='btn btn-danger btn-sm' data-no='"+product.no+"'>삭제</button></td>";
+				tr += "<tr>";
+				
+				$tbody.append(tr);
+			});
+			
+		}
+	})
+	
+	// <button data-no="23">상세</button>
+	$("#table-product-list").on("click", "button", function() {
+		var productNo = $(this).data("no");
+		
+		$.ajax({
+			type:"GET",
+			url:"/json/product.do",
+			data: {no:productNo},
+			dataType: 'json',
+			success: function(product) {
+				$("#table-product td:eq(0)").text(product.no);
+				$("#table-product td:eq(1)").text(product.stock);
+				$("#table-product td:eq(2)").text(product.name);
+				$("#table-product td:eq(3)").text(product.price);
+				$("#table-product td:eq(4)").text(product.discountPrice);
+				
+				$("#modal-product").modal("show")
+			}
+		})
+	});
+	
+	$("#btn-open-form").click(function() {
+		$("#modal-product-form").modal("show")
+	})
+})
+</script>
+</body>
+</html>
