@@ -20,7 +20,7 @@
 	<!-- 프로젝트, 라이브러리 버전 등의 설정값 지정 -->
 	<properties>
 		<java-version>1.8</java-version>
-		<org.springframework-version>4.3.28.RELEASE</org.springframework-version>
+		<org.springframework-version>5.2.20.RELEASE</org.springframework-version>
 		<org.aspectj-version>1.9.6</org.aspectj-version>
 		<org.slf4j-version>1.7.30</org.slf4j-version>
 	</properties>
